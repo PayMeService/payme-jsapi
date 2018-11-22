@@ -1,0 +1,128 @@
+@import "mixin";
+@import "fonts";
+@import "libs";
+@import "vars";
+
+
+.container{
+	padding: 50px 0;
+}
+
+
+
+
+
+.first-example .wrap-block{
+	background: #774CE7;
+	border-radius: 10px;
+	padding: 120px 140px 80px;
+	color: #BBE9FD;
+}
+.first-example .form-control, .first-example .input-group-text{
+	background-color: #817CFB;
+	border: none;
+}
+
+.first-example button{
+	background: #FF86EB;
+	border: none;
+	color: #fff;
+	&:hover{
+		background: #FF86EB;
+		box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+	}
+}
+.first-example .row-wrap-for-all-input{
+	padding-bottom: 35px;
+}
+.first-example .one-block-for-all-divided-input{
+	background: #7F7FF6;
+	border-radius: 5px;
+	padding-left: 10px;
+	margin-bottom: 20px;
+
+}
+.first-example .wrap-for-input{
+	font-size: 20px;
+	padding: 3px;
+	border-bottom: 1px solid #8A88FF;
+	&:last-child{
+		border-bottom: none;
+	}
+	label{
+		color: #BBE9FD;
+		padding-left: 0;
+	}
+	.input-group-prepend{
+		width: 90px;
+	}
+}
+
+.first-example .block-for-validate-errors{
+	width: 100%;
+	height: 40px;
+	padding-top: 20px;
+	p{
+		text-align: center;
+	}
+}
+
+.inside{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	padding-left: 10px;
+	//&:hover{
+	//	display: none;
+	//}
+
+}
+
+.first-example .line-for-several-input .form-control{
+	padding: .375rem 0 ;
+}
+
+.help-block{
+	animation-name: fadeInUp1;
+	animation-duration: 2s;
+}
+
+.first-example .has-error label {
+	color: red;
+}
+
+
+input+placeholder{
+	color: blue
+}
+
+
+
+
+@keyframes fadeInUp1 {
+	0%{
+		display: none;
+		opacity:0;
+		transform:translate3d(0,100%,0);
+	}
+	100%{
+		display: block;
+		opacity:1;
+		transform:translateZ(0);
+	}
+}
+
+
+
+
+
+
+
+
+
+@import "media"; // Всегда в конце

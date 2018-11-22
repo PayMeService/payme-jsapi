@@ -1,3 +1,25 @@
+<h1>Вызовы</h1>
+<p><strong>npm i</strong> -- устанавливаем npm</p>
+<p><strong>bower i</strong> -- устанавливаем зависимости bower(jquery,bootstrap и др.)</p>
+<p><strong>gulp</strong> -- запускаем gulp (scss, watch, browserSync и т.д)</p>
+<p><strong>gulp build</strong> -- собираем dist</p>
+<p><strong>gulp remove-dist</strong> -- удаляем dist</p>
+<p><strong>gulp deploy</strong> -- развертывание проекта на сервере из DIST папки через FTP;</p>
+<p><strong>gulp clear-cache</strong> -- очистить кэш</p>
+
+
+
+Bower (вызовы)
+<bower init> --- Определенее файла bower.json , если его нет.
+<bower i>  --- Устанавливает все зависимости которые записаны в bower.json.
+<bower i какая-либо зависимость --save>  ---  Устанавливает определенную зависимость какую тебе нужно с ключом save
+ (не только для разработки) --seve-dev -(только для разработки).
+<npm install -g bower-update> --- установка плагина для обновления зависимостей до последней версии.
+<bower-update> --- само обновление всех зависимостей.
+
+
+
+
 # Client Integration Manual
 
 **Examples can be found here:**
@@ -20,7 +42,6 @@
     
       <!-- Include Client API Library in your page -->
       <script src="https://cdn.paymeservice.com/hf/v1/index-latest.js"></script>
-      
       ...
     </head>
     <body>...</body>
@@ -228,85 +249,6 @@ PayMe.create(key, { testMode: true })
  var cardNumber = fields.create(PayMe.fields.NUMBER);
 ```
 
-### Field Settings and Styling
-
-This feature allows you to tune fields appearance more precisely. Any field can receive configuration object during creation with `.create()` method
-```
-// Field configuration
-var cardNumberSettings = {
-  placeholder: 'Credit Card Number',
-  messages: { 
-    invalid: 'Bad credit card number'
-  },
-  styles: {
-    base: {
-      'font-size': '20px',
-      'text-align': 'center'
-    },
-    invalid: {
-      'color': 'red'
-    },
-    valid: {
-      'color': 'green'
-    }
-  }
-};
-
-// Field creation
-var cardNumber = fields.create(PayMe.fields.NUMBER, cardNumberSettings);
-```
-
-#### Complete settings structure
-```
-{
-  // Input placeholder
-  placeholder: 'Field placeholder',
-  // Validation messages
-  messages: { 
-    invalid: 'Bad field value',
-    required: 'Field is mandatory'    
-  },
-  // CSS Styles
-  styles: {
-    // Base styles*
-    base: {
-      'color': 'gray',
-      'font-size': '20px',
-      'text-align': 'center',
-      'letter-spacing': '3px',
-      'text-decoration': 'underline',
-      'text-shadow': '1px 1px 2px black, 0 0 1em rgb(0,0,255)',
-      'text-transform': 'lowercase'
-    },
-    // Styles applied when field invalid*
-    invalid: {
-      'color': 'rgb(255, 0, 0)',
-      'font-size': '20px',
-      'text-align': 'center',
-      'letter-spacing': '3px',
-      'text-decoration': 'underline',
-      'text-shadow': '1px 1px 2px black, 0 0 1em rgb(255,0,0)',
-      'text-transform': 'lowercase'
-    },
-    // Styles applied when field valid*
-    valid: {
-      'color': 'rgb(0, 255, 0)',
-      'font-size': '20px',
-      'text-align': 'center',
-      'letter-spacing': '3px',
-      'text-decoration': 'underline',
-      'text-shadow': '1px 1px 2px black, 0 0 1em rgb(255,0,0)',
-      'text-transform': 'lowercase'
-    }
-  }
-}
-```
->
-> *- due security reasons we allow only small amount of style properties which can be founded above 
->
-
-
-#### Attach fields to your page
 Having created all of necessary fields, they must be mounted to the chosen page place. Fields will be shown on your page only after mounting
 ```
 
