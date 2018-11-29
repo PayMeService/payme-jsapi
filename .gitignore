@@ -5,6 +5,4 @@
 /.idea/
 /*.md/
 /app/libs
-/package.json
-/package-lock.json
 
