@@ -2,11 +2,11 @@
  * Created by thoryachev on 22.11.2018.
  */
 // HELPERS ---------------------------------------------------------------------------------
-(function (global) {
+(function () {
     const mpl = 'MPL15282-97137EVV-KOAOAOIT-VWCZPB8V';
     const consolePre = document.getElementById('console-pre3');
 
-    const form = document.getElementById('checkout-form');
+    const form = document.getElementById('checkout-form3');
     const errorsMessages = document.getElementById('errors3');
 
     const numberGroup = document.getElementById('card-number-group3');
@@ -43,10 +43,10 @@
 
 
     function showErrors(errorsFromField, el, ev) {
-        var highest = errorsFromField[Object.keys(errorsFromField).sort().pop()];
+        let lastElement = errorsFromField[Object.keys(errorsFromField).pop()];
         el.classList.remove('fadeOutDown');
         if (!ev.message) {
-            el.innerText = highest;
+            el.innerText = lastElement;
         } else {
             el.innerText = ev.message;
         }
@@ -57,177 +57,131 @@
             wrapper.classList.remove('has-error');
             this.classList.remove('fadeInUp');
             this.classList.add('fadeOutDown');
-            delete errorsFromField[ev.field]; // УДАЛЯЕМ КОНкретный эллемент из объекта который прошел валидацию
-            if (Object.keys(errorsFromField).length > 0) { // если в объекте еще остались ошибки выводим их
+            delete errorsFromField[ev.field]; // delete error from the object that passed validation
+            if (Object.keys(errorsFromField).length > 0) { // if the object still has errors - output them
                 showErrors(errorsFromField, this, ev);
                 this.classList.remove('fadeOutDown');
                 this.classList.add('fadeInUp');
             }
         } else {
-            errorsFromField[ev.field] = ev.message; //ЗАПИСЫВАЕМ ошибки в объект
+            errorsFromField[ev.field] = ev.message; // write errors to the object
             wrapper.classList.add('has-error');
             this.classList.remove('fadeOutDown');
             this.classList.add('fadeInUp');
-            if (Object.keys(errorsFromField).length > 0) { //проверяем есть ли в обьекте еще какие то элементы
-                showErrors(errorsFromField, this, ev); // и показываем их
+            if (Object.keys(errorsFromField).length > 0) { // check if there is an error in the object
+                showErrors(errorsFromField, this, ev); // and show its
             }
         }
     }
 
-    // function changeCardProviderIcon(cardVendor) {
-    //
-    //     const vendorsToClasses = {
-    //         'unknown': ['fas', 'fa-credit-card'],
-    //
-    //         'amex': ['fab', 'fa-cc-amex'],
-    //         'diners': ['fab', 'fa-cc-diners-club'],
-    //         'jcb': ['fab', 'fa-cc-jcb'],
-    //         'visa': ['fab', 'fa-cc-visa'],
-    //         'mastercard': ['fab', 'fa-cc-mastercard'],
-    //         'discover': ['fab', 'fa-cc-discover'],
-    //     };
-    //
-    //     cardProvider2.classList.remove(...cardProvider2.classList);
-    //     cardProvider2.classList.add(...(vendorsToClasses[cardVendor] ? vendorsToClasses[cardVendor] : vendorsToClasses['unknown']));
-    // }
+    function unfocusFields(currentField, elemId) {
+        document.querySelectorAll('.third-example label').forEach((el, index) => {
+            if(currentField.getState().isEmpty && el.getAttribute('for') === elemId) {
+                el.classList.remove('animated-label');
+            }
+        })
+    }
+    function focusOnField(elemId) {
+        document.querySelector('label[for=' + elemId + ']').classList.add('animated-label');
+    }
+    function queryLabelFor(elemId) {
+        return document.querySelector('label[for=' + elemId + ']');
+    }
 
+// -----------------------------------------------------------------------------------------------------------------
 
     const allFieldsReady = [];
 
+    const DEFAULT_SETTINGS = {
+        styles: {
+            base: {
+                'font-size': '16px',
+                'color': '#000'
+            },
+            invalid: {
+                'color': '#FF0000'
+            },
+            valid: {
+                'color': '#000'
+            }
+        }
+    };
 
     PayMe.create(mpl, {
         testMode: true
     }).then((instance) => {
 
+
+
         const fields = instance.hostedFields();
 
         const cardNumberSettings = {
             placeholder: ' ',
-            messages: {invalid: 'Bad credit card number'},
-            styles: {
-                base: {
-                    'font-size': '16px',
-                    'color': '#000',
-                    'height': '50px',
-                },
-                invalid: {
-                    'color': 'red'
-                },
-                valid: {
-                    'color': '#000'
-                }
-            }
+            messages: {
+                invalid: 'Bad credit card number',
+                required: 'Field "Card Number" is mandatory'
+            },
+            ...DEFAULT_SETTINGS,
         };
         const firstNameField = {
             placeholder: ' ',
-            styles: {
-                base: {
-                    'font-size': '16px',
-                    'color': '#000',
-                    'height': '50px',
-                },
-                invalid: {
-                    'color': 'red'
-                },
-                valid: {
-                    'color': '#000'
-                }
-            }
+            messages: {
+                invalid: 'Letters only for field "First name"',
+                required: 'Field "First name" is mandatory'
+            },
+            ...DEFAULT_SETTINGS,
         };
 
-        const lastNameield = {
+        const lastNamefield = {
             placeholder: ' ',
-            styles: {
-                base: {
-                    'font-size': '16px',
-                    'color': '#000',
-                },
-                invalid: {
-                    'color': 'red'
-                },
-                valid: {
-                    'color': '#000'
-                }
-            }
+            messages: {
+                invalid: 'Letters only for field "Last name"',
+                required: 'Field "Last name" is mandatory'
+            },
+            ...DEFAULT_SETTINGS,
         };
 
         const emailField = {
             placeholder: ' ',
-            styles: {
-                base: {
-                    'font-size': '16px',
-                    'color': '#000',
-                },
-                invalid: {
-                    'color': 'red'
-                },
-                valid: {
-                    'color': '#000'
-                }
-            }
+            messages: {
+                invalid: 'Invalid Email',
+                required: 'Field "Email" is mandatory'
+            },
+            ...DEFAULT_SETTINGS,
         };
 
         const phoneField = {
             placeholder: ' ',
-            styles: {
-                base: {
-                    'font-size': '16px',
-                    'color': '#000',
-                },
-                invalid: {
-                    'color': 'red'
-                },
-                valid: {
-                    'color': '#000'
-                }
-            }
+            messages: {
+                invalid: 'Invalid Phone',
+                required: 'Field "Phone" is mandatory'
+            },
+            ...DEFAULT_SETTINGS,
         };
 
         const socialIdField = {
             placeholder: ' ',
-            styles: {
-                base: {
-                    'font-size': '16px',
-                    'color': '#000',
-                },
-                invalid: {
-                    'color': 'red'
-                },
-                valid: {
-                    'color': '#000'
-                }
-            }
+            messages: {
+                invalid: 'Invalid Phone',
+                required: 'Field "Social Id" is mandatory'
+            },
+            ...DEFAULT_SETTINGS,
         };
         const cvcField = {
             placeholder: ' ',
-            styles: {
-                base: {
-                    'font-size': '16px',
-                    'color': '#000',
-                },
-                invalid: {
-                    'color': 'red'
-                },
-                valid: {
-                    'color': '#000'
-                }
-            }
+            messages: {
+                invalid: 'Invalid CVC',
+                required: 'Field "CVC" is mandatory'
+            },
+            ...DEFAULT_SETTINGS,
         };
         const expirationField = {
             placeholder: ' ',
-            styles: {
-                base: {
-                    'font-size': '16px',
-                    'color': '#000',
-                },
-                invalid: {
-                    'color': 'red'
-                },
-                valid: {
-                    'color': '#000'
-                },
-
-            }
+            messages: {
+                invalid: 'Invalid Expiration',
+                required: 'Field "Expiration" is mandatory'
+            },
+            ...DEFAULT_SETTINGS,
         };
 
 
@@ -236,26 +190,9 @@
             cardNumber.mount('#card-number-container3')
         );
         cardNumber.on('keyup', toggleValidationMessages.bind(errorsMessages, numberGroup));
+        cardNumber.on('focus', () => focusOnField('card-number-container3'));
+        cardNumber.on('blur', () => unfocusFields(cardNumber, 'card-number-container3'));
 
-        cardNumber.on('change', console.log);
-        cardNumber.on('focus', console.log);
-        cardNumber.on('blur', function () {
-            document.querySelectorAll('.third-example label').forEach(function (el, index) {
-                if(cardNumber.getState().isEmpty && el.getAttribute('for') === 'card-number-container3') {
-                    el.classList.remove('animated-label');
-                }
-            })
-        });
-        cardNumber.on('keyup', function (e) {
-            this.options.styles.base.color = 'green';
-            console.log(this);
-        });
-        cardNumber.on('keydown', function (e) {
-            console.log(this.options);
-        });
-        cardNumber.on('keypress', console.log);
-        cardNumber.on('validity-changed', console.log);
-        cardNumber.on('card-type-changed', console.log);
 
         const expiration = fields.create(PayMe.fields.EXPIRATION, expirationField);
         allFieldsReady.push(
@@ -263,13 +200,8 @@
         );
         expiration.on('keyup', toggleValidationMessages.bind(errorsMessages, expirationGroup));
         expiration.on('validity-changed', toggleValidationMessages.bind(errorsMessages, expirationGroup));
-        expiration.on('blur', function () {
-            document.querySelectorAll('.third-example label').forEach(function (el, index) {
-                if(expiration.getState().isEmpty && el.getAttribute('for') === 'card-expiration-container3') {
-                    el.classList.remove('animated-label');
-                }
-            })
-        });
+        expiration.on('focus', () => focusOnField('card-expiration-container3'));
+        expiration.on('blur', () => unfocusFields(expiration, 'card-expiration-container3'));
 
         const cvc = fields.create(PayMe.fields.CVC, cvcField);
         allFieldsReady.push(
@@ -277,13 +209,8 @@
         );
         cvc.on('keyup', toggleValidationMessages.bind(errorsMessages, cvcGroup));
         cvc.on('validity-changed', toggleValidationMessages.bind(errorsMessages, cvcGroup));
-        cvc.on('blur', function () {
-            document.querySelectorAll('.third-example label').forEach(function (el, index) {
-                if(cvc.getState().isEmpty && el.getAttribute('for') === 'card-cvv-container3') {
-                    el.classList.remove('animated-label');
-                }
-            })
-        });
+        cvc.on('focus', () => focusOnField('card-cvv-container3'));
+        cvc.on('blur', () => unfocusFields(cvc, 'card-cvv-container3'));
 
         const phone = fields.create(PayMe.fields.PHONE, phoneField);
         allFieldsReady.push(
@@ -291,13 +218,8 @@
         );
         phone.on('keyup', toggleValidationMessages.bind(errorsMessages, phoneGroup));
         phone.on('validity-changed', toggleValidationMessages.bind(errorsMessages, phoneGroup));
-        phone.on('blur', function () {
-            document.querySelectorAll('.third-example label').forEach(function (el, index) {
-                if(phone.getState().isEmpty && el.getAttribute('for') === 'phone-container3') {
-                    el.classList.remove('animated-label');
-                }
-            })
-        });
+        phone.on('focus', () => focusOnField('phone-container3'));
+        phone.on('blur', () => unfocusFields(phone, 'phone-container3'));
 
         const email = fields.create(PayMe.fields.EMAIL, emailField);
         allFieldsReady.push(
@@ -305,13 +227,8 @@
         );
         email.on('keyup', toggleValidationMessages.bind(errorsMessages, emailGroup));
         email.on('validity-changed', toggleValidationMessages.bind(errorsMessages, emailGroup));
-        email.on('blur', function () {
-            document.querySelectorAll('.third-example label').forEach(function (el, index) {
-                if(email.getState().isEmpty && el.getAttribute('for') === 'email-container3') {
-                    el.classList.remove('animated-label');
-                }
-            })
-        });
+        email.on('focus', () => focusOnField('email-container3'));
+        email.on('blur', () => unfocusFields(email, 'email-container3'));
 
         const firstName = fields.create(PayMe.fields.NAME_FIRST, firstNameField);
         allFieldsReady.push(
@@ -319,27 +236,17 @@
         );
         firstName.on('keyup', toggleValidationMessages.bind(errorsMessages, firstNameGroup));
         firstName.on('validity-changed', toggleValidationMessages.bind(errorsMessages, firstNameGroup));
-        firstName.on('blur', function () {
-            document.querySelectorAll('.third-example label').forEach(function (el, index) {
-                if(firstName.getState().isEmpty && el.getAttribute('for') === 'first-name-container3') {
-                    el.classList.remove('animated-label');
-                }
-            })
-        });
+        firstName.on('focus', () => focusOnField('first-name-container3'));
+        firstName.on('blur', () => unfocusFields(firstName, 'first-name-container3'));
 
-        const lastName = fields.create(PayMe.fields.NAME_LAST, lastNameield);
+        const lastName = fields.create(PayMe.fields.NAME_LAST, lastNamefield);
         allFieldsReady.push(
             lastName.mount('#last-name-container3')
         );
         lastName.on('keyup', toggleValidationMessages.bind(errorsMessages, lastNameroup));
         lastName.on('validity-changed', toggleValidationMessages.bind(errorsMessages, lastNameroup));
-        lastName.on('blur', function () {
-            document.querySelectorAll('.third-example label').forEach(function (el, index) {
-                if(lastName.getState().isEmpty && el.getAttribute('for') === 'last-name-container3') {
-                    el.classList.remove('animated-label');
-                }
-            })
-        });
+        lastName.on('focus', () => focusOnField('last-name-container3'));
+        lastName.on('blur', () => unfocusFields(lastName, 'last-name-container3'));
 
         const socialId = fields.create(PayMe.fields.SOCIAL_ID, socialIdField);
         allFieldsReady.push(
@@ -347,47 +254,33 @@
         );
         socialId.on('keyup', toggleValidationMessages.bind(errorsMessages, socialIdGroup));
         socialId.on('validity-changed', toggleValidationMessages.bind(errorsMessages, socialIdGroup));
-        socialId.on('blur', function () {
-            document.querySelectorAll('.third-example label').forEach(function (el, index) {
-                if(socialId.getState().isEmpty && el.getAttribute('for') === 'social-id-container3') {
-                    el.classList.remove('animated-label');
-                }
-            })
-        });
+        socialId.on('focus', () => focusOnField('social-id-container3'));
+        socialId.on('blur', () => unfocusFields(socialId, 'social-id-container3'));
 
         Promise.all(allFieldsReady).then(() => submitButton.disabled = false);
 
-        document.querySelector('label[for=first-name-container3]').addEventListener('click', function(){
-            this.classList.add('animated-label');
+        queryLabelFor('first-name-container3').addEventListener('click', () => {
             firstName.focus();
         });
-
-        document.querySelector('label[for=last-name-container3]').addEventListener('click', function(){
-            this.classList.add('animated-label');
+        queryLabelFor('last-name-container3').addEventListener('click', () => {
             lastName.focus();
         });
-        document.querySelector('label[for=email-container3]').addEventListener('click', function(){
-            this.classList.add('animated-label');
+        queryLabelFor('email-container3').addEventListener('click', () => {
             email.focus();
         });
-        document.querySelector('label[for=phone-container3]').addEventListener('click', function(){
-            this.classList.add('animated-label');
+        queryLabelFor('phone-container3').addEventListener('click', () => {
             phone.focus();
         });
-        document.querySelector('label[for=card-cvv-container3]').addEventListener('click', function(){
-            this.classList.add('animated-label');
+        queryLabelFor('card-cvv-container3').addEventListener('click', () => {
             cvc.focus();
         });
-        document.querySelector('label[for=card-expiration-container3]').addEventListener('click', function(){
-            this.classList.add('animated-label');
+        queryLabelFor('card-expiration-container3').addEventListener('click', () => {
             expiration.focus();
         });
-        document.querySelector('label[for=card-number-container3]').addEventListener('click', function(){
-            this.classList.add('animated-label');
+        queryLabelFor('card-number-container3').addEventListener('click', () => {
             cardNumber.focus();
         });
-        document.querySelector('label[for=social-id-container3]').addEventListener('click', function(){
-            this.classList.add('animated-label');
+        queryLabelFor('social-id-container3').addEventListener('click', () => {
             socialId.focus();
         });
 
@@ -435,4 +328,4 @@
     });
 
 
-})(window);
+})();

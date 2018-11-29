@@ -1,0 +1,171 @@
+.first-example{
+    margin-top: 80px;
+}
+.first-example .wrap-block {
+    background: #774CE7;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 120px 10px 85px;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.first-example .wrap-block form {
+    max-width: 475px;
+    margin: 0 auto;
+}
+
+.first-example .form-control, .first-example .input-group-text {
+    background-color: #817CFB;
+    border: none;
+}
+.first-example .input-group, .first-example .input-group-text {
+    background-color: #817CFB;
+    border: none;
+}
+
+.first-example button {
+    background: #FF86EB;
+    border: none;
+    color: #fff;
+}
+
+.first-example button:hover {
+    background: #FF86EB;
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.first-example .row-wrap-for-all-input {
+    padding-bottom: 35px;
+}
+
+.first-example .one-block-for-all-divided-input {
+    background: #7F7FF6;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.first-example .wrap-for-input {
+    font-size: 20px;
+    padding: 3px;
+    border-bottom: 1px solid #8A88FF;
+}
+
+.first-example .wrap-for-input:last-child {
+    border-bottom: none;
+}
+
+.first-example .wrap-for-input label {
+    color: #BBE9FD;
+    padding-left: 0;
+}
+
+.first-example .wrap-for-input .input-group-prepend {
+    width: 90px;
+}
+
+.first-example .block-for-validate-errors {
+    width: 100%;
+    min-height: 45px;
+    padding-top: 20px;
+}
+
+.first-example .block-for-validate-errors p {
+    text-align: center;
+    color: #ffffff;
+}
+
+.first-example .line-for-several-input {
+    background: #7F7FF6;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.first-example .line-for-several-input i {
+    font-size: 20px;
+    color: #BAE9FC;
+}
+
+.first-example .form-control {
+    padding: .375rem 0;
+    height: 40px;
+}
+
+.first-example .icon-for-card {
+    width: 12%;
+    justify-content: center;
+}
+
+.first-example .block-for-card-number {
+    width: 56%;
+}
+
+.first-example .block-for-expiration-card {
+    width: 20%;
+    -moz-transform: translateX(-50px);
+    -ms-transform: translateX(-50px);
+    -webkit-transform: translateX(-50px);
+    -o-transform: translateX(-50px);
+    transform: translateX(-50px);
+    -webkit-transition: transform .3s;
+    transition: transform .3s;
+}
+
+.first-example .block-for-cvv-card {
+    width: 12%;
+    -moz-transform: translateX(-30px);
+    -ms-transform: translateX(-30px);
+    -webkit-transform: translateX(-30px);
+    -o-transform: translateX(-30px);
+    transform: translateX(-30px);
+    -webkit-transition: transform .3s;
+    transition: transform .3s;
+}
+
+.first-example .animate-card-option {
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-transition: transform .3s;
+    transition: all .3s;
+}
+
+@media only screen and (max-width : 425px) {
+    .first-example .icon-for-card {
+        width: 15%;
+    }
+
+    .first-example .block-for-card-number {
+        width: 85%;
+    }
+
+    .first-example .block-for-expiration-card {
+        width: 50%;
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -webkit-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+        padding-left: 15px;
+    }
+
+    .first-example .block-for-cvv-card {
+        width: 50%;
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -webkit-transform: translateX(0);
+        -o-transform: translateX(0);
+        transform: translateX(0);
+        padding-left: 15px;
+    }
+
+}

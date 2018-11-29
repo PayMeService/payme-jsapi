@@ -2,143 +2,94 @@
  * Created by thoryachev on 22.11.2018.
  */
 // HELPERS ---------------------------------------------------------------------------------
-(function (global) {
-const mpl2 = 'MPL15282-97137EVV-KOAOAOIT-VWCZPB8V';
+(function () {
+    const mpl = 'MPL15282-97137EVV-KOAOAOIT-VWCZPB8V';
 
-const consolePre2 = document.getElementById('console-pre2');
-const form = document.getElementById('checkout-form');
+    const consolePre = document.getElementById('console-pre2');
+    const form = document.getElementById('checkout-form2');
 
-const errorsMessages2 = document.getElementById('errors2');
+    const errorsMessages = document.getElementById('errors2');
 
-const numberGroup2 = document.getElementById('card-number-group2');
-// const numberMessages2 = document.getElementById('card-number-messages2');
+    const numberGroup = document.getElementById('card-number-group2');
 
-const expirationGroup2 = document.getElementById('card-expiration-group2');
-// const expirationMessages2 = document.getElementById('card-expiration-messages2');
+    const expirationGroup = document.getElementById('card-expiration-group2');
 
-const cvcGroup2 = document.getElementById('card-cvv-group2');
-// const cvcMessages2 = document.getElementById('card-cvv-messages2');
+    const cvcGroup = document.getElementById('card-cvv-group2');
 
-const firstNameGroup2 = document.getElementById('first-name-group2');
-// const firstNameMessages2 = document.getElementById('first-name-messages2');
+    const firstNameGroup = document.getElementById('first-name-group2');
 
-const lastNameGroup2 = document.getElementById('last-name-group2');
-// const lastNameMessages2 = document.getElementById('last-name-messages2');
+    const lastNameGroup = document.getElementById('last-name-group2');
 
-const emailGroup2 = document.getElementById('email-group2');
-// const emailMessages2 = document.getElementById('email-messages2');
+    const emailGroup = document.getElementById('email-group2');
 
-const phoneGroup2 = document.getElementById('phone-group2');
-// const phoneMessages2 = document.getElementById('phone-messages2');
+    const phoneGroup = document.getElementById('phone-group2');
 
-const socialIdGroup2 = document.getElementById('social-id-group2');
-// const socialIdMessages2 = document.getElementById('social-id-messages2');
-
+    const socialIdGroup = document.getElementById('social-id-group2');
 
 // -----------------------------------------------------------------------------------------------------------------
 
-const submitButton2 = document.getElementById('submit-button2');
-submitButton2.disabled = true;
+    const submitButton = document.getElementById('submit-button2');
+    submitButton.disabled = true;
 
-function tokenizationStarted() {
-    submitButton2.disabled = true;
-    console.log('Tokenization started!');
-}
-
-function tokenizationFinished() {
-    submitButton2.disabled = false;
-    console.log('Tokenization finished!');
-}
-
-const errorsFromField2 = {};
-
-function showErrors2(errorsFromField, el, ev) {
-    console.log(el);
-    // var length = Object.keys(errorsFromField).length;
-    var highest = errorsFromField[ Object.keys(errorsFromField).sort().pop()];
-    el.classList.remove('fadeOutDown');
-    // el.classList.remove('fadeInUp');
-    console.log(ev.message);
-    if(!ev.message){
-        el.innerText = highest;
-    }else{
-        el.innerText = ev.message;
+    function tokenizationStarted() {
+        submitButton.disabled = true;
+        console.log('Tokenization started!');
     }
-}
 
-function toggleValidationMessages(wrapper, ev) {
-    console.log(errorsFromField2);
-    console.log(ev);
-    if (ev.isValid) {
-        wrapper.classList.remove('has-error');
-        this.classList.remove('fadeInUp');
-        this.classList.add('fadeOutDown');
-        delete errorsFromField2[ev.field]; // УДАЛЯЕМ КОНкретный эллемент из объекта который прошел валидацию
+    function tokenizationFinished() {
+        submitButton.disabled = false;
+        console.log('Tokenization finished!');
+    }
 
-        if(Object.keys(errorsFromField2).length > 0){ // если в объекте еще остались ошибки выводим их
-            showErrors2(errorsFromField2, this, ev);
+    const errorsFromField = {};
+
+    function showErrors(errorsFromField, el, ev) {
+        let lastElement = errorsFromField[Object.keys(errorsFromField).pop()];
+        el.classList.remove('fadeOutDown');
+        if (!ev.message) {
+            el.innerText = lastElement;
+        } else {
+            el.innerText = ev.message;
+        }
+    }
+
+    function toggleValidationMessages(wrapper, ev) {
+        if (ev.isValid) {
+            wrapper.classList.remove('has-error');
+            wrapper.classList.add('color-for-field');
+            this.classList.remove('fadeInUp');
+            this.classList.add('fadeOutDown');
+            delete errorsFromField[ev.field]; // delete error from the object that passed validation
+            if (Object.keys(errorsFromField).length > 0) { // if the object still has errors - output them
+                showErrors(errorsFromField, this, ev);
+                this.classList.remove('fadeOutDown');
+                this.classList.add('fadeInUp');
+            }
+        } else {
+            errorsFromField[ev.field] = ev.message; // write errors to the object
+            wrapper.classList.add('has-error');
+            wrapper.classList.remove('color-for-field');
+            console.log(wrapper);
             this.classList.remove('fadeOutDown');
             this.classList.add('fadeInUp');
-        }
-    } else {
-        errorsFromField2[ev.field] = ev.message; //ЗАПИСЫВАЕМ ошибки в объект
-        wrapper.classList.add('has-error');
-        console.log(wrapper);
-        this.classList.remove('fadeOutDown');
-        this.classList.add('fadeInUp');
-        if(Object.keys(errorsFromField2).length > 0){ //проверяем есть ли в обьекте еще какие то элементы
-            showErrors2(errorsFromField2, this, ev); // и показываем их
+            if (Object.keys(errorsFromField).length > 0) { // check if there is an error in the object
+                showErrors(errorsFromField, this, ev); // and show its
+            }
         }
     }
-}
 
-// function changeCardProviderIcon(cardVendor) {
-//
-//     const vendorsToClasses = {
-//         'unknown': ['fas', 'fa-credit-card'],
-//
-//         'amex': ['fab', 'fa-cc-amex'],
-//         'diners': ['fab', 'fa-cc-diners-club'],
-//         'jcb': ['fab', 'fa-cc-jcb'],
-//         'visa': ['fab', 'fa-cc-visa'],
-//         'mastercard': ['fab', 'fa-cc-mastercard'],
-//         'discover': ['fab', 'fa-cc-discover'],
-//     };
-//
-//     cardProvider2.classList.remove(...cardProvider2.classList);
-//     cardProvider2.classList.add(...(vendorsToClasses[cardVendor] ? vendorsToClasses[cardVendor] : vendorsToClasses['unknown']));
-// }
+    function addClass(fieldId, className) {
+        document.getElementById(fieldId).classList.add(className);
+    }
+    function removeClass(fieldId, className) {
+        document.getElementById(fieldId).classList.remove(className);
+    }
 
 // -----------------------------------------------------------------------------------------------------------------
 
-const allFieldsReady = [];
+    const allFieldsReady = [];
 
-PayMe.create(mpl2, {
-    testMode: true
-}).then((instance) => {
-
-    const fields2 = instance.hostedFields();
-
-    const cardNumberSettings2 = {
-        placeholder: '1234 1234 1234 1234',
-        messages: { invalid: 'Bad credit card number' },
-        styles: {
-            base: {
-                'color': '#565B7D',
-                'font-size': '16px',
-                '::placeholder': {'color': '#8FA7C8'}
-            },
-            invalid: {
-                'color': '#fff'
-            },
-            valid: {
-                'color': '#565B7D',
-            },
-        }
-    };
-    const firstNameField2 = {
-        placeholder: 'First name',
-        // messages: { invalid: 'Bad credit card number' },
+    const DEFAULT_SETTINGS = {
         styles: {
             base: {
                 'color': '#565B7D',
@@ -154,269 +105,196 @@ PayMe.create(mpl2, {
         }
     };
 
-    const lastNameField2 = {
-        placeholder: 'Last name',
-        // messages: { invalid: 'Bad credit card number' },
-        styles: {
-            base: {
-                'color': '#565B7D',
-                'font-size': '16px',
-                '::placeholder': {'color': '#8FA7C8'}
-            },
-            invalid: {
-                'color': '#fff'
-            },
-            valid: {
-                'color': '#565B7D',
-            },
-        }
-    };
+    PayMe.create(mpl, {
+        testMode: true
+    }).then((instance) => {
 
-    const emailField2 = {
-        placeholder: 'Email',
-        // messages: { invalid: 'Bad credit card number' },
-        styles: {
-            base: {
-                'color': '#565B7D',
-                'font-size': '16px',
-                '::placeholder': {'color': '#8FA7C8'}
+        const fields = instance.hostedFields();
+
+        const cardNumberSettings = {
+            ...DEFAULT_SETTINGS,
+            placeholder: '1234 1234 1234 1234',
+            messages: {
+                invalid: 'Bad credit card number',
+                required: 'Field "Card Number" is mandatory'
             },
-            invalid: {
-                'color': '#fff'
+        };
+        const firstNameField = {
+            ...DEFAULT_SETTINGS,
+            placeholder: 'First name',
+            messages: {
+                invalid: 'Letters only for field "First name"',
+                required: 'Field "First name" is mandatory'
             },
-            valid: {
-                'color': '#565B7D',
-            },
-        }
-    };
-
-    const phoneField2 = {
-        placeholder: 'Phone',
-        // messages: { invalid: 'Bad credit card number' },
-        styles: {
-            base: {
-                'color': '#565B7D',
-                'font-size': '16px',
-                '::placeholder': {'color': '#8FA7C8'}
-            },
-            invalid: {
-                'color': '#fff'
-            },
-            valid: {
-                'color': '#565B7D',
-            },
-        }
-    };
-
-    const socialIdField2 = {
-        placeholder: 'Social ID',
-        // messages: { invalid: 'Bad credit card number' },
-        styles: {
-            base: {
-                'color': '#565B7D',
-                'font-size': '16px',
-                '::placeholder': {'color': '#8FA7C8'}
-            },
-            invalid: {
-                'color': '#fff'
-            },
-            valid: {
-                'color': '#565B7D',
-            },
-        }
-    };
-    const cvcField2 = {
-        placeholder: 'CVC',
-        // messages: { invalid: 'Bad credit card number' },
-        styles: {
-            base: {
-                'color': '#565B7D',
-                'font-size': '16px',
-                '::placeholder': {'color': '#8FA7C8'}
-            },
-            invalid: {
-                'color': '#fff'
-            },
-            valid: {
-                'color': '#565B7D',
-            },
-        }
-    };
-    const expirationField2 = {
-        // placeholder: 'CVC',
-        // messages: { invalid: 'Bad credit card number' },
-        styles: {
-            base: {
-                'color': '#565B7D',
-                'font-size': '16px',
-                '::placeholder': {'color': '#8FA7C8'}
-            },
-            invalid: {
-                'color': '#fff'
-            },
-            valid: {
-                'color': '#565B7D',
-            },
-
-        }
-    };
-    const cardNumber2 = fields2.create(PayMe.fields.NUMBER, cardNumberSettings2);
-    allFieldsReady.push(
-        cardNumber2.mount('#card-number-container2')
-    );
-    // cardNumber2.on('card-type-changed', ev => changeCardProviderIcon(ev.cardType));
-    cardNumber2.on('keyup', toggleValidationMessages.bind(errorsMessages2, numberGroup2));
-
-    cardNumber2.on('change', console.log);
-    cardNumber2.on('blur', function () {
-        document.getElementById('card-number-container2').classList.remove('focus-on-field');
-    });
-    cardNumber2.on('focus', function () {
-        document.getElementById('card-number-container2').classList.add('focus-on-field');
-    });
-    cardNumber2.on('keyup', function () {});
-    cardNumber2.on('keydown', function () {});
-    cardNumber2.on('keypress', console.log);
-    cardNumber2.on('validity-changed', console.log);
-    cardNumber2.on('card-type-changed', console.log);
-
-    const expiration = fields2.create(PayMe.fields.EXPIRATION, expirationField2);
-    allFieldsReady.push(
-        expiration.mount('#card-expiration-container2')
-    );
-    expiration.on('keyup', toggleValidationMessages.bind(errorsMessages2, expirationGroup2));
-    expiration.on('validity-changed', toggleValidationMessages.bind(errorsMessages2, expirationGroup2));
-    expiration.on('blur', function () {
-        document.getElementById('card-expiration-container2').classList.remove('focus-on-field')
-    });
-    expiration.on('focus', function () {
-        document.getElementById('card-expiration-container2').classList.add('focus-on-field')
-    });
-
-    const cvc = fields2.create(PayMe.fields.CVC, cvcField2);
-    allFieldsReady.push(
-        cvc.mount('#card-cvv-container2')
-    );
-    cvc.on('keyup', toggleValidationMessages.bind(errorsMessages2, cvcGroup2));
-    cvc.on('validity-changed', toggleValidationMessages.bind(errorsMessages2, cvcGroup2));
-    cvc.on('blur', function () {
-        document.getElementById('card-cvv-container2').classList.remove('focus-on-field')
-    });
-    cvc.on('focus', function () {
-        document.getElementById('card-cvv-container2').classList.add('focus-on-field')
-    });
-
-    const phone = fields2.create(PayMe.fields.PHONE, phoneField2);
-    allFieldsReady.push(
-        phone.mount('#phone-container2')
-    );
-    phone.on('keyup', toggleValidationMessages.bind(errorsMessages2, phoneGroup2));
-    phone.on('validity-changed', toggleValidationMessages.bind(errorsMessages2, phoneGroup2));
-    phone.on('blur', function () {
-        document.getElementById('phone-container2').classList.remove('focus-on-field')
-    });
-    phone.on('focus', function () {
-        document.getElementById('phone-container2').classList.add('focus-on-field')
-    });
-
-    const email = fields2.create(PayMe.fields.EMAIL, emailField2);
-    allFieldsReady.push(
-        email.mount('#email-container2')
-    );
-    email.on('keyup', toggleValidationMessages.bind(errorsMessages2, emailGroup2));
-    email.on('validity-changed', toggleValidationMessages.bind(errorsMessages2, emailGroup2));
-    email.on('blur', function () {
-        document.getElementById('email-container2').classList.remove('focus-on-field')
-    });
-    email.on('focus', function () {
-        document.getElementById('email-container2').classList.add('focus-on-field')
-    });
-
-    const firstName = fields2.create(PayMe.fields.NAME_FIRST, firstNameField2);
-    allFieldsReady.push(
-        firstName.mount('#first-name-container2')
-    );
-    firstName.on('keyup', toggleValidationMessages.bind(errorsMessages2, firstNameGroup2));
-    firstName.on('validity-changed', toggleValidationMessages.bind(errorsMessages2, firstNameGroup2));
-    firstName.on('blur', function () {
-        document.getElementById('first-name-container2').classList.remove('focus-on-field')
-    });
-    firstName.on('focus', function () {
-        document.getElementById('first-name-container2').classList.add('focus-on-field')
-    });
-
-    const lastName = fields2.create(PayMe.fields.NAME_LAST, lastNameField2);
-    allFieldsReady.push(
-        lastName.mount('#last-name-container2')
-    );
-    lastName.on('keyup', toggleValidationMessages.bind(errorsMessages2, lastNameGroup2));
-    lastName.on('validity-changed', toggleValidationMessages.bind(errorsMessages2, lastNameGroup2));
-    lastName.on('blur', function () {
-        document.getElementById('last-name-container2').classList.remove('focus-on-field')
-    });
-    lastName.on('focus', function () {
-        document.getElementById('last-name-container2').classList.add('focus-on-field')
-    });
-
-    const socialId = fields2.create(PayMe.fields.SOCIAL_ID, socialIdField2);
-    allFieldsReady.push(
-        socialId.mount('#social-id-container2')
-    );
-    socialId.on('keyup', toggleValidationMessages.bind(errorsMessages2, socialIdGroup2));
-    socialId.on('validity-changed', toggleValidationMessages.bind(errorsMessages2, socialIdGroup2));
-    socialId.on('blur', function () {
-        document.getElementById('social-id-container2').classList.remove('focus-on-field')
-    });
-    socialId.on('focus', function () {
-        document.getElementById('social-id-container2').classList.add('focus-on-field')
-    });
-
-    Promise.all(allFieldsReady).then(() => submitButton2.disabled = false);
-
-    form.addEventListener('submit', ev => {
-        ev.preventDefault();
-
-        const sale = {
-
-            // payerFirstName: 'Vladimir',
-            // payerLastName: 'kondratiev',
-            // payerEmail: 'trahomoto@mailforspam.com',
-            // payerPhone: '1231231',
-
-            payerSocialId: '65656',
-
-            total: {
-                label: '🚀 Rubber duck',
-                amount: {
-                    currency: 'ILS',
-                    value: '55.00',
-                }
-            }
         };
 
+        const lastNameField = {
+            ...DEFAULT_SETTINGS,
+            placeholder: 'Last name',
+            messages: {
+                invalid: 'Letters only for field "Last name"',
+                required: 'Field "Last name" is mandatory'
+            },
+        };
 
-        tokenizationStarted();
+        const emailField = {
+            ...DEFAULT_SETTINGS,
+            messages: {
+                invalid: 'Invalid Email',
+                required: 'Field "Email" is mandatory'
+            },
+        };
 
-        instance.tokenize(sale)
-            .then(data => {
-                console.log('Tokenization result::: ', data);
-                consolePre2.innerText = 'Tokenization result::: \r\n';
-                consolePre2.innerText = consolePre2.innerText + JSON.stringify(data, null, 2);
+        const phoneField = {
+            ...DEFAULT_SETTINGS,
+            placeholder: 'Phone',
+            messages: {
+                invalid: 'Invalid Phone',
+                required: 'Field "Phone" is mandatory'
+            },
+        };
 
-                tokenizationFinished();
-            })
-            .catch(err => {
-                console.error(err);
+        const socialIdField = {
+            ...DEFAULT_SETTINGS,
+            placeholder: 'Social ID',
+            messages: {
+                invalid: 'Invalid Phone',
+                required: 'Field "Social Id" is mandatory'
+            },
+        };
+        const cvcField = {
+            ...DEFAULT_SETTINGS,
+            placeholder: 'CVC',
+            messages: {
+                invalid: 'Invalid CVC',
+                required: 'Field "CVC" is mandatory'
+            },
+        };
+        const expirationField = {
+            ...DEFAULT_SETTINGS,
+            messages: {
+                invalid: 'Invalid Expiration',
+                required: 'Field "Expiration" is mandatory'
+            },
+        };
 
-                tokenizationFinished();
-            });
-    });
+        const cardNumber = fields.create(PayMe.fields.NUMBER, cardNumberSettings);
+        allFieldsReady.push(
+            cardNumber.mount('#card-number-container2')
+        );
+        cardNumber.on('keyup', toggleValidationMessages.bind(errorsMessages, numberGroup));
+        cardNumber.on('blur', () => removeClass('card-number-container2', 'focus-on-field'));
+        cardNumber.on('focus', () => addClass('card-number-container2', 'focus-on-field'));
+
+        const expiration = fields.create(PayMe.fields.EXPIRATION, expirationField);
+        allFieldsReady.push(
+            expiration.mount('#card-expiration-container2')
+        );
+        expiration.on('keyup', toggleValidationMessages.bind(errorsMessages, expirationGroup));
+        expiration.on('validity-changed', toggleValidationMessages.bind(errorsMessages, expirationGroup));
+        expiration.on('blur', () => removeClass('card-expiration-container2', 'focus-on-field'));
+        expiration.on('focus', () => addClass('card-expiration-container2', 'focus-on-field'));
+
+        const cvc = fields.create(PayMe.fields.CVC, cvcField);
+        allFieldsReady.push(
+            cvc.mount('#card-cvv-container2')
+        );
+        cvc.on('keyup', toggleValidationMessages.bind(errorsMessages, cvcGroup));
+        cvc.on('validity-changed', toggleValidationMessages.bind(errorsMessages, cvcGroup));
+        cvc.on('blur', () => removeClass('card-cvv-container2', 'focus-on-field'));
+        cvc.on('focus', () => addClass('card-cvv-container2', 'focus-on-field'));
+
+        const phone = fields.create(PayMe.fields.PHONE, phoneField);
+        allFieldsReady.push(
+            phone.mount('#phone-container2')
+        );
+        phone.on('keyup', toggleValidationMessages.bind(errorsMessages, phoneGroup));
+        phone.on('validity-changed', toggleValidationMessages.bind(errorsMessages, phoneGroup));
+        phone.on('blur', () => removeClass('phone-container2', 'focus-on-field'));
+        phone.on('focus', () => addClass('phone-container2', 'focus-on-field'));
+
+        const email = fields.create(PayMe.fields.EMAIL, emailField);
+        allFieldsReady.push(
+            email.mount('#email-container2')
+        );
+        email.on('keyup', toggleValidationMessages.bind(errorsMessages, emailGroup));
+        email.on('validity-changed', toggleValidationMessages.bind(errorsMessages, emailGroup));
+        email.on('blur', () => removeClass('email-container2', 'focus-on-field'));
+        email.on('focus', () => addClass('email-container2', 'focus-on-field'));
+
+        const firstName = fields.create(PayMe.fields.NAME_FIRST, firstNameField);
+        allFieldsReady.push(
+            firstName.mount('#first-name-container2')
+        );
+        firstName.on('keyup', toggleValidationMessages.bind(errorsMessages, firstNameGroup));
+        firstName.on('validity-changed', toggleValidationMessages.bind(errorsMessages, firstNameGroup));
+        firstName.on('blur', () => removeClass('first-name-container2', 'focus-on-field'));
+        firstName.on('focus', () => addClass('first-name-container2', 'focus-on-field'));
+
+        const lastName = fields.create(PayMe.fields.NAME_LAST, lastNameField);
+        allFieldsReady.push(
+            lastName.mount('#last-name-container2')
+        );
+        lastName.on('keyup', toggleValidationMessages.bind(errorsMessages, lastNameGroup));
+        lastName.on('validity-changed', toggleValidationMessages.bind(errorsMessages, lastNameGroup));
+        lastName.on('blur', () => removeClass('last-name-container2', 'focus-on-field'));
+        lastName.on('focus', () => addClass('last-name-container2', 'focus-on-field'));
+
+        const socialId = fields.create(PayMe.fields.SOCIAL_ID, socialIdField);
+        allFieldsReady.push(
+            socialId.mount('#social-id-container2')
+        );
+        socialId.on('keyup', toggleValidationMessages.bind(errorsMessages, socialIdGroup));
+        socialId.on('validity-changed', toggleValidationMessages.bind(errorsMessages, socialIdGroup));
+        socialId.on('blur', () => removeClass('social-id-container2', 'focus-on-field'));
+        socialId.on('focus', () => addClass('social-id-container2', 'focus-on-field'));
+
+        Promise.all(allFieldsReady).then(() => submitButton.disabled = false);
+
+        form.addEventListener('submit', ev => {
+            ev.preventDefault();
+
+            const sale = {
+
+                // payerFirstName: 'Vladimir',
+                // payerLastName: 'kondratiev',
+                // payerEmail: 'trahomoto@mailforspam.com',
+                // payerPhone: '1231231',
+
+                payerSocialId: '65656',
+
+                total: {
+                    label: '🚀 Rubber duck',
+                    amount: {
+                        currency: 'ILS',
+                        value: '55.00',
+                    }
+                }
+            };
+
+
+            tokenizationStarted();
+
+            instance.tokenize(sale)
+                .then(data => {
+                    console.log('Tokenization result::: ', data);
+                    consolePre.innerText = 'Tokenization result::: \r\n';
+                    consolePre.innerText = consolePre.innerText + JSON.stringify(data, null, 2);
+
+                    tokenizationFinished();
+                })
+                .catch(err => {
+                    console.error(err);
+
+                    tokenizationFinished();
+                });
+        });
 
 //document.getElementById('tear-down').addEventListener('click', () => instance.teardown());
 
-});
+    });
 
 
-})(window);
+})();
 
 

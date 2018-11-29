@@ -9,17 +9,21 @@
 
     <title>PayMe Examples</title>
 
-    <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
-    <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-    <link rel="stylesheet" href="css/main.min.css">
 
-    <script src="https://cdn.paymeservice.com/hf/v1/hostedfields.js"></script>
+    <!--<link rel="stylesheet" href="css/main.min.css">-->
+
+    <link rel="stylesheet" href="css/example1.css">
+    <link rel="stylesheet" href="css/example2.css">
+    <link rel="stylesheet" href="css/example3.css">
+    <link rel="stylesheet" href="css/example4.css">
+
+
 </head>
 
 <body>
-
-<input class="cyka" type="text" placeholder="cerf">
 
 <div class="first-example">
     <div class="justify-content-md-center">
@@ -81,8 +85,8 @@
 
                     </div>
                     <div class="input-group line-for-several-input">
-                        <div class="input-group-prepend" class="icon-for-card">
-                            <div class="input-group-text" style="width: 100%;">
+                        <div class="input-group-prepend icon-for-card">
+                            <div class="input-group-text">
                                             <span class="input-group-addon"><i class="fas fa-credit-card"
                                                                                id="card-provider"></i></span>
                             </div>
@@ -100,7 +104,7 @@
 
                 </div>
 
-                <button class="subscribe btn btn-lg btn-block" id="submit-button" disabled>
+                <button type="submit" class="subscribe btn btn-lg btn-block" id="submit-button" disabled>
                     Pay $55
                 </button>
 
@@ -117,8 +121,6 @@
     </div>
 </div>
 
-
-<hr>
 
 <div class="second-example">
     <div class="justify-content-md-center">
@@ -174,20 +176,12 @@
                 </div>
 
 
-                <button class="subscribe btn btn-lg btn-block" id="submit-button2" disabled>
+                <button type="submit" class="subscribe btn btn-lg btn-block" id="submit-button2" disabled>
                     Pay $25
                 </button>
 
                 <div class="block-for-validate-errors">
                     <p id="errors2" class="help-block animated"></p>
-                    <!--<p id="card-number-messages" class="help-block" style="display: none;"></p>-->
-                    <!--<p id="first-name-messages" class="help-block" style="display: none;"></p>-->
-                    <!--<p id="social-id-messages" class="help-block" style="display: none;"></p>-->
-                    <!--<p id="card-expiration-messages" class="help-block" style="display: none;"></p>-->
-                    <!--<p id="card-cvv-messages" class="help-block" style="display: none;"></p>-->
-                    <!--<p id="last-name-messages" class="help-block" style="display: none;"></p>-->
-                    <!--<p id="email-messages" class="help-block" style="display: none;"></p>-->
-                    <!--<p id="phone-messages" class="help-block" style="display: none;"></p>-->
                 </div>
                 <div class="row" style="display:none;" id="checkout-form-errors2">
                     <div class="col-12">
@@ -203,7 +197,6 @@
     </div>
 </div>
 
-<hr>
 
 <div class="third-example">
     <div class="justify-content-md-center">
@@ -278,7 +271,7 @@
                 </div>
 
 
-                <button class="subscribe btn btn-lg btn-block" id="submit-button3" disabled>
+                <button type="submit" class="subscribe btn btn-lg btn-block" id="submit-button3" disabled>
                     Pay $25
                 </button>
 
@@ -299,7 +292,6 @@
     </div>
 </div>
 
-<hr>
 
 <div class="container fourth-example">
     <div class="row justify-content-md-center">
@@ -387,7 +379,7 @@
 
                                 <div class="row">
                                     <div class="col-12">
-                                        <button class="subscribe btn btn-lg btn-block" id="submit-button4" disabled>
+                                        <button type="submit" class="subscribe btn btn-lg btn-block" id="submit-button4" disabled>
                                             Pay $25
                                         </button>
                                     </div>
@@ -416,8 +408,11 @@
 </div>
 
 
-<script src="js/libs.js"></script>
-<script src="js/common.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.paymeservice.com/hf/v1/hostedfields.js"></script>
+
 <script src="js/exemple1.js"></script>
 <script src="js/exemple2.js"></script>
 <script src="js/exemple3.js"></script>
