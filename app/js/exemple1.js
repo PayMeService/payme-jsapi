@@ -403,7 +403,7 @@
     });
 
 
-})(window);
+})();
 
 
 // var frm = document.getElementsByTagName('iframe');

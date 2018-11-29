@@ -3,6 +3,9 @@
  */
 // HELPERS ---------------------------------------------------------------------------------
 (function (global) {
+
+    const document = global.document;
+
     const mpl = 'MPL15282-97137EVV-KOAOAOIT-VWCZPB8V';
     const consolePre = document.getElementById('console-pre3');
 
@@ -73,23 +76,6 @@
             }
         }
     }
-
-    // function changeCardProviderIcon(cardVendor) {
-    //
-    //     const vendorsToClasses = {
-    //         'unknown': ['fas', 'fa-credit-card'],
-    //
-    //         'amex': ['fab', 'fa-cc-amex'],
-    //         'diners': ['fab', 'fa-cc-diners-club'],
-    //         'jcb': ['fab', 'fa-cc-jcb'],
-    //         'visa': ['fab', 'fa-cc-visa'],
-    //         'mastercard': ['fab', 'fa-cc-mastercard'],
-    //         'discover': ['fab', 'fa-cc-discover'],
-    //     };
-    //
-    //     cardProvider2.classList.remove(...cardProvider2.classList);
-    //     cardProvider2.classList.add(...(vendorsToClasses[cardVendor] ? vendorsToClasses[cardVendor] : vendorsToClasses['unknown']));
-    // }
 
 
     const allFieldsReady = [];
