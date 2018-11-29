@@ -230,7 +230,7 @@ PayMe.create(key, { testMode: true })
 
 ### Field Settings and Styling
 
-This feature allows you to tune fields appearance more precisely. Any field can receive configuration object during creation with `.create()` method
+This feature allows you to tune fields appearance more precisely. **Any field** can receive configuration object during creation with `.create()` method
 ```
 // Field configuration
 var cardNumberSettings = {
@@ -276,7 +276,16 @@ var cardNumber = fields.create(PayMe.fields.NUMBER, cardNumberSettings);
       'letter-spacing': '3px',
       'text-decoration': 'underline',
       'text-shadow': '1px 1px 2px black, 0 0 1em rgb(0,0,255)',
-      'text-transform': 'lowercase'
+      'text-transform': 'lowercase',
+      '::placeholder': {
+         'color': 'green',
+         'font-size': '18px',
+         'text-align': 'center',
+         'letter-spacing': '3px',
+         'text-decoration': 'underline',
+         'text-shadow': '1px 1px 2px black, 0 0 1em rgb(0,0,255)',
+         'text-transform': 'none'
+      }
     },
     // Styles applied when field invalid*
     invalid: {
@@ -286,7 +295,16 @@ var cardNumber = fields.create(PayMe.fields.NUMBER, cardNumberSettings);
       'letter-spacing': '3px',
       'text-decoration': 'underline',
       'text-shadow': '1px 1px 2px black, 0 0 1em rgb(255,0,0)',
-      'text-transform': 'lowercase'
+      'text-transform': 'lowercase',
+      '::placeholder': {
+         'color': 'green',
+         'font-size': '18px',
+         'text-align': 'center',
+         'letter-spacing': '3px',
+         'text-decoration': 'underline',
+         'text-shadow': '1px 1px 2px black, 0 0 1em rgb(0,0,255)',
+         'text-transform': 'none'
+      }
     },
     // Styles applied when field valid*
     valid: {
@@ -296,7 +314,16 @@ var cardNumber = fields.create(PayMe.fields.NUMBER, cardNumberSettings);
       'letter-spacing': '3px',
       'text-decoration': 'underline',
       'text-shadow': '1px 1px 2px black, 0 0 1em rgb(255,0,0)',
-      'text-transform': 'lowercase'
+      'text-transform': 'lowercase',
+      '::placeholder': {
+         'color': 'green',
+         'font-size': '18px',
+         'text-align': 'center',
+         'letter-spacing': '3px',
+         'text-decoration': 'underline',
+         'text-shadow': '1px 1px 2px black, 0 0 1em rgb(0,0,255)',
+         'text-transform': 'none'
+      }
     }
   }
 }
@@ -390,20 +417,56 @@ PayMe.create(key, { testMode: true })
 ```
 and each time when `keyup` event occurs on cardNumber field you will be notified. Keep in mind, for security reasons `event` object was significantly simplified (see **Field Event Object**) 
 
+#### Field methods
+   Method                         |  Description
+--------------------------------- | ------------------------------------------------------------
+`.getState()`                     | get current field state (*see Field state*)
+`.mount(querySelector)`           | attach field to the page DOM queried with `querySelector`
+`.focus()`                        | make field focused programmatically 
+`.blur()`                         | make field loose focus programmatically
+`.set(value)`                     | set field input value
+`.on(event, listener)`            | add event listener to the field (*see Field events*)
+`.once(event, listener)`          | add "single shot" event listener to the field (*see Field events*)
+`.removeListener(event, listener)`| remove field event listener (*see Field events*)
+`.removeAllListeners(event)`      | remove all field event listeners (*see Field events*)
+`.teardown()`                     | destroy field
+
+#### Field state
+Each field track his own state and you can get it with `.getState()` method:
+
+```
+  ...
+  var cvv = fields.create('cvc', options);
+  ...
+  console.log(cvv.getState());
+  ...
+```
+Field state has such structure:
+```
+// ...getState()
+{
+    field: "cardNumber",        // field which emits this event 
+    isValid: false,             // field validity status,
+    isEmpty: false              // is field has value
+    message: "Mandatory field"
+}
+```
+
+
 #### Field events
 
 Using field events your can build you own logic. There is available limited set of events out of the box, those caused by security reasons  
 
-Event type        | Fields       | Description
------------------ | :----------: | -------------
-`change`          | all          | works like standard [change](https://developer.mozilla.org/en-US/docs/Web/Events/change)
-`blur`            | all          | works like standard [blur](https://developer.mozilla.org/en-US/docs/Web/Events/blur)
-`focus`           | all          | works like standard [focus](https://developer.mozilla.org/en-US/docs/Web/Events/focus)
-`keyup`           | all          | works like standard [keyup](https://developer.mozilla.org/en-US/docs/Web/Events/keyup)
-`keydown`         | all          | works like standard [keydown](https://developer.mozilla.org/en-US/docs/Web/Events/keydown)
-`keypress`        | all          | works like standard [keypress](https://developer.mozilla.org/en-US/docs/Web/Events/keypress)
-`validity-changed`| all          | emits when field validity state changed. Can be used for showing error messages
-`card-type-changed`| *cardNumber*| emits when library detects vendor of entered Credit Card number
+Event type          | Fields       | Description
+------------------- | :----------: | -------------
+`change`            | all          | works like standard [change](https://developer.mozilla.org/en-US/docs/Web/Events/change)
+`blur`              | all          | works like standard [blur](https://developer.mozilla.org/en-US/docs/Web/Events/blur)
+`focus`             | all          | works like standard [focus](https://developer.mozilla.org/en-US/docs/Web/Events/focus)
+`keyup`             | all          | works like standard [keyup](https://developer.mozilla.org/en-US/docs/Web/Events/keyup)
+`keydown`           | all          | works like standard [keydown](https://developer.mozilla.org/en-US/docs/Web/Events/keydown)
+`keypress`          | all          | works like standard [keypress](https://developer.mozilla.org/en-US/docs/Web/Events/keypress)
+`validity-changed`  | all          | emits when field validity state changed. Can be used for showing error messages
+`card-type-changed` | *cardNumber* | emits when library detects vendor of entered Credit Card number
 
 
 #### Field Event Object
@@ -416,7 +479,8 @@ Shape of `change`, `blur`, `focus`, `keyup`, `keydown`, `keypress`, `validity-ch
     type: "focus",       
     event: "focus",      // event type
     field: "cardNumber", // field which emits this event 
-    isValid: false       // field validity status
+    isValid: false,      // field validity status,
+    isEmpty: false       // is field has value
 }
 ```
 
@@ -426,6 +490,7 @@ Shape of `change`, `blur`, `focus`, `keyup`, `keydown`, `keypress`, `validity-ch
     type: "focus",
     event: "focus",                     // event type
     field: "cardNumber",                // field which emits this event 
+    isEmpty: false,                      // is field has value
 
     isValid: false,                     // field validity status
     message: "Bad credit card number"   // validation error message
@@ -440,7 +505,8 @@ Shape of `card-type-changed` is little bit different and it can be used for disp
     type: "card-type-changed"
     event: "card-type-changed"
     field: "cardNumber"
-    
+
+    isEmpty: false,
     isValid: true,
     
     cardType: "visa"          // Card vendor 
@@ -455,6 +521,7 @@ Shape of `card-type-changed` is little bit different and it can be used for disp
     field: "cardNumber"
     
     isValid: false
+    isEmpty: false,
     message: "Bad credit card number",
     
     cardType: "visa"          // Card vendor 
