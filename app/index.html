@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>Example Bootstrap implementation</title>
+    <title>PayMe Examples</title>
 
     <!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
     <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
@@ -18,135 +19,185 @@
 
 <body>
 
-<div class="container first-example">
-    <div class="row justify-content-md-center">
-        <div class="col-lg-8 col-md-10 col-sm-12 wrap-block">
+<input class="cyka" type="text" placeholder="cerf">
+
+<div class="first-example">
+    <div class="justify-content-md-center">
+        <div class="wrap-block">
             <!-- CREDIT CARD FORM STARTS HERE -->
-            <div class="panel panel-default credit-card-box">
-                <div class="panel-body">
-                    <form role="form" id="checkout-form">
+            <form role="form" id="checkout-form">
 
-                        <div class="row row-wrap-for-all-input">
-                            <div class="col-12">
-                                <div class="one-block-for-all-divided-input">
+                <div class="row-wrap-for-all-input">
+                    <div class="one-block-for-all-divided-input">
 
-                                    <div class="wrap-for-input">
-                                        <div class="input-group" id="first-name-group">
-                                            <div class="input-group-prepend">
-                                                <label for="first-name-container" class="input-group-text">First Name</label>
-                                            </div>
-
-                                            <div id="first-name-container" class="form-control">
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="wrap-for-input">
-                                        <div class="input-group" id="last-name-group">
-                                            <div class="input-group-prepend">
-                                                <label for="last-name-container" class="input-group-text">Last Name</label>
-                                            </div>
-                                            <div id="last-name-container" class="form-control"></div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="wrap-for-input">
-                                        <div class="input-group" id="email-group">
-                                            <div class="input-group-prepend">
-                                                <label for="email-container" class="input-group-text">Email</label>
-                                            </div>
-                                            <div id="email-container" class="form-control"></div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="wrap-for-input">
-                                        <div class="input-group" id="phone-group">
-                                            <div class="input-group-prepend">
-                                                <label for="phone-container" class="input-group-text">Phone</label>
-                                            </div>
-                                            <div id="phone-container" class="form-control"></div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="wrap-for-input">
-                                        <div class="input-group" id="social-id-group">
-                                            <div class="input-group-prepend">
-                                                <label for="social-id-container" class="input-group-text">Social id</label>
-                                            </div>
-                                            <div id="social-id-container" class="form-control"></div>
-
-                                        </div>
-
-                                    </div>
-
+                        <div class="wrap-for-input">
+                            <div class="input-group" id="first-name-group">
+                                <div class="input-group-prepend">
+                                    <label for="first-name-container" class="input-group-text">First
+                                        Name</label>
                                 </div>
+                                <div id="first-name-container" class="form-control"></div>
+                            </div>
+                        </div>
 
-
-                                <div class="input-group line-for-several-input" id="card-number-group">
-                                    <div class="input-group-prepend" style="width: 10%;">
-                                        <div class="input-group-text" style="width: 100%;">
-                                            <span class="input-group-addon"><i class="fas fa-credit-card" id="card-provider"></i></span>
-                                        </div>
-                                    </div>
-                                    <div id="card-number-container" class="form-control" style="width: 60%;"></div>
-                                    <div id="card-expiration-container" class="form-control" style="width: 15%;"></div>
-                                    <div id="card-cvv-container" class="form-control" style="width: 15%;"></div>
+                        <div class="wrap-for-input">
+                            <div class="input-group" id="last-name-group">
+                                <div class="input-group-prepend">
+                                    <label for="last-name-container" class="input-group-text">Last
+                                        Name</label>
                                 </div>
-
+                                <div id="last-name-container" class="form-control"></div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <button class="subscribe btn btn-lg btn-block" id="submit-button" disabled>
-                                    Pay 55.00 ILS
-                                </button>
-                            </div>
-                        </div>
-                        <div class="block-for-validate-errors">
-                            <p id="errors" class="help-block" style="display: none;"></p>
-                        </div>
-                        <div class="row" style="display:none;" id="checkout-form-errors">
-                            <div class="col-12">
-                                <p class="payment-errors"></p>
+                        <div class="wrap-for-input">
+                            <div class="input-group" id="email-group">
+                                <div class="input-group-prepend">
+                                    <label for="email-container" class="input-group-text">Email</label>
+                                </div>
+                                <div id="email-container" class="form-control"></div>
                             </div>
                         </div>
 
+                        <div class="wrap-for-input">
+                            <div class="input-group" id="phone-group">
+                                <div class="input-group-prepend">
+                                    <label for="phone-container" class="input-group-text">Phone</label>
+                                </div>
+                                <div id="phone-container" class="form-control"></div>
+                            </div>
+                        </div>
 
-                    </form>
+                        <div class="wrap-for-input">
+                            <div class="input-group" id="social-id-group">
+                                <div class="input-group-prepend">
+                                    <label for="social-id-container" class="input-group-text">Social
+                                        id</label>
+                                </div>
+                                <div id="social-id-container" class="form-control"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="input-group line-for-several-input">
+                        <div class="input-group-prepend" class="icon-for-card">
+                            <div class="input-group-text" style="width: 100%;">
+                                            <span class="input-group-addon"><i class="fas fa-credit-card"
+                                                                               id="card-provider"></i></span>
+                            </div>
+                        </div>
+                        <div id="card-number-group" class="block-for-card-number">
+                            <div id="card-number-container" class="form-control"></div>
+                        </div>
+                        <div id="card-expiration-group" class="block-for-expiration-card">
+                            <div id="card-expiration-container" class="form-control"></div>
+                        </div>
+                        <div id="card-cvv-group" class="block-for-cvv-card">
+                            <div id="card-cvv-container" class="form-control"></div>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
+
+                <button class="subscribe btn btn-lg btn-block" id="submit-button" disabled>
+                    Pay $55
+                </button>
+
+                <div class="block-for-validate-errors">
+                    <p id="errors" class="help-block animated"></p>
+                </div>
+                <div class="block-for-payment-errors">
+                    <p class="payment-errors"></p>
+                </div>
+
+            </form>
             <!-- CREDIT CARD FORM ENDS HERE -->
         </div>
     </div>
 </div>
 
 
+<hr>
 
-<div class="container first-example">
-    <div class="row justify-content-md-center">
-        <div class="col-lg-8 col-md-10 col-sm-12 wrap-block">
+<div class="second-example">
+    <div class="justify-content-md-center">
+        <div class="wrap-block">
             <!-- CREDIT CARD FORM STARTS HERE -->
-            <div class="panel panel-default credit-card-box">
-                <div class="panel-body">
-                    <form role="form">
 
+            <form role="form" id="checkout-form2">
 
+                <div class="row-wrap-for-all-input">
 
+                    <div class="wrap-for-input">
+                        <div class="input-group" id="first-name-group2">
+                            <div id="first-name-container2" class="form-control"></div>
+                        </div>
+                    </div>
 
+                    <div class="wrap-for-input">
+                        <div class="input-group" id="last-name-group2">
+                            <div id="last-name-container2" class="form-control"></div>
+                        </div>
+                    </div>
 
+                    <div class="input-group line-for-several-input">
+                        <div class="wrap-for-input ">
+                            <div class="input-group" id="email-group2">
+                                <div id="email-container2" class="form-control"></div>
+                            </div>
+                        </div>
+                        <div class="wrap-for-input">
+                            <div class="input-group" id="phone-group2">
+                                <div id="phone-container2" class="form-control"></div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="wrap-for-input">
+                        <div class="input-group" id="card-number-group2">
+                            <div id="card-number-container2" class="form-control"></div>
+                        </div>
+                    </div>
 
-
-
-                    </form>
+                    <div class="input-group line-for-several-input">
+                        <div id="card-expiration-group2" class="block-for-expiration-card wrap-block-with-input">
+                            <div id="card-expiration-container2" class="form-control"></div>
+                        </div>
+                        <div id="card-cvv-group2" class="block-for-cvv-card wrap-block-with-input">
+                            <div id="card-cvv-container2" class="form-control"></div>
+                        </div>
+                        <div id="social-id-group2" class="block-for-social-id wrap-block-with-input">
+                            <div id="social-id-container2" class="form-control"></div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+
+                <button class="subscribe btn btn-lg btn-block" id="submit-button2" disabled>
+                    Pay $25
+                </button>
+
+                <div class="block-for-validate-errors">
+                    <p id="errors2" class="help-block animated"></p>
+                    <!--<p id="card-number-messages" class="help-block" style="display: none;"></p>-->
+                    <!--<p id="first-name-messages" class="help-block" style="display: none;"></p>-->
+                    <!--<p id="social-id-messages" class="help-block" style="display: none;"></p>-->
+                    <!--<p id="card-expiration-messages" class="help-block" style="display: none;"></p>-->
+                    <!--<p id="card-cvv-messages" class="help-block" style="display: none;"></p>-->
+                    <!--<p id="last-name-messages" class="help-block" style="display: none;"></p>-->
+                    <!--<p id="email-messages" class="help-block" style="display: none;"></p>-->
+                    <!--<p id="phone-messages" class="help-block" style="display: none;"></p>-->
+                </div>
+                <div class="row" style="display:none;" id="checkout-form-errors2">
+                    <div class="col-12">
+                        <p class="payment-errors"></p>
+                    </div>
+                </div>
+
+
+            </form>
+
             <!-- CREDIT CARD FORM ENDS HERE -->
         </div>
     </div>
@@ -154,101 +205,95 @@
 
 <hr>
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+<div class="third-example">
+    <div class="justify-content-md-center">
+        <div class="wrap-block">
             <!-- CREDIT CARD FORM STARTS HERE -->
-            <div class="panel panel-default credit-card-box">
-                <div class="panel-body">
-                    <form role="form" id="checkout-form2">
-                        <div class="row">
-                            <div class="col-xs-8 col-md-8">
-                                <div class="form-group" id="card-number-group2">
-                                    <label for="card-number-container2" class="control-label">CARD NUMBER</label>
-                                    <div class="input-group input-group-lg">
-                                        <div id="card-number-container2" class="form-control input-lg"></div>
-                                        <span class="input-group-addon"><i class="fas fa-credit-card" id="card-provider2"></i></span>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-xs-4 col-md-4">
-                                <div class="form-group" id="social-id-group2">
-                                    <label for="social-id-container2" class="control-label">SOCIAL ID</label>
-                                    <div id="social-id-container2" class="form-control input-lg"></div>
-                                    <p id="social-id-messages2" class="help-block" style="display: none;"></p>
-                                </div>
+            <form role="form" id="checkout-form3">
+                <div class="row-wrap-for-all-input">
+                    <div class="input-group line-for-several-input">
+                        <div class="wrap-for-input">
+                            <div class="input-group" id="first-name-group3">
+                                <label for="first-name-container3" class="">First name</label>
+                                <div id="first-name-container3" class="form-control"></div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-xs-7 col-md-7">
-                                <div class="form-group" id="card-expiration-group2">
-                                    <label for="card-expiration-container2" class="control-label">EXPIRATION DATE</label>
-                                    <div id="card-expiration-container2" class="form-control input-lg"></div>
-                                    <p id="card-expiration-messages2" class="help-block" style="display: none;"></p>
-                                </div>
+                        <div class="wrap-for-input">
+                            <div class="input-group" id="last-name-group3">
+                                <label for="last-name-container3" class="">Last name</label>
+                                <div id="last-name-container3" class="form-control"></div>
                             </div>
-                            <div class="col-xs-5 col-md-5 pull-right">
-                                <div class="form-group" id="card-cvv-group2">
-                                    <label for="card-cvv-container2" class="control-label">CV CODE</label>
-                                    <div id="card-cvv-container2" class="form-control input-lg"></div>
-                                    <p id="card-cvv-messages2" class="help-block" style="display: none;"></p>
-                                </div>
+                        </div>
+                    </div>
+
+                    <div class="wrap-for-input ">
+                        <div class="input-group" id="email-group3">
+                            <label for="email-container3" class="">Email</label>
+                            <div id="email-container3" class="form-control"></div>
+                        </div>
+                    </div>
+
+                    <div class="input-group line-for-several-input">
+
+                        <div class="wrap-for-input">
+                            <div class="input-group" id="phone-group3">
+                                <label for="phone-container3" class="">Phone</label>
+                                <div id="phone-container3" class="form-control"></div>
+                            </div>
+                        </div>
+                        <div class="wrap-for-input">
+                            <div class="input-group" id="social-id-group3">
+                                <label for="social-id-container3" class="">Social ID</label>
+                                <div id="social-id-container3" class="form-control"></div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-xs-6 col-md-6">
-                                <div class="form-group" id="first-name-group2">
-                                    <label for="first-name-container2" class="control-label">FIRST NAME</label>
-                                    <div id="first-name-container2" class="form-control input-lg"></div>
-                                    <p id="first-name-messages2" class="help-block" style="display: none;"></p>
-                                </div>
+                    </div>
+
+                    <div class="wrap-for-input">
+                        <div class="input-group" id="card-number-group3">
+                            <label for="card-number-container3" class="">Card Number</label>
+                            <div id="card-number-container3" class="form-control"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="input-group line-for-several-input">
+                        <div class="wrap-for-input">
+                            <div class="input-group" id="card-expiration-group3">
+                                <label for="card-expiration-container3" class="">Expiration</label>
+                                <div id="card-expiration-container3" class="form-control"></div>
                             </div>
-                            <div class="col-xs-6 col-md-6">
-                                <div class="form-group" id="last-name-group2">
-                                    <label for="last-name-container2" class="control-label">LAST NAME</label>
-                                    <div id="last-name-container2" class="form-control input-lg"></div>
-                                    <p id="last-name-messages2" class="help-block" style="display: none;"></p>
-                                </div>
+                        </div>
+                        <div class="wrap-for-input">
+                            <div class="input-group" id="card-cvv-group3">
+                                <label for="card-cvv-container3" class="">CVV</label>
+                                <div id="card-cvv-container3" class="form-control"></div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-xs-6 col-md-6">
-                                <div class="form-group" id="email-group2">
-                                    <label for="email-container" class="control-label">EMAIL</label>
-                                    <div id="email-container2" class="form-control input-lg"></div>
-                                    <p id="email-messages2" class="help-block" style="display: none;"></p>
-                                </div>
-                            </div>
-                            <div class="col-xs-6 col-md-6">
-                                <div class="form-group" id="phone-group2">
-                                    <label for="phone-container2" class="control-label">PHONE NUMBER</label>
-                                    <div id="phone-container2" class="form-control input-lg"></div>
-                                    <p id="phone-messages2" class="help-block" style="display: none;"></p>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button class="subscribe btn btn-success btn-lg btn-block" id="submit-button2" disabled>
-                                    Pay 55.00 ILS
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="row" style="display:none;" id="checkout-form-errors2">
-                            <div class="col-xs-12">
-                                <p class="payment-errors"></p>
-                            </div>
-                        </div>
-
-                    </form>
                 </div>
-            </div>
+
+
+                <button class="subscribe btn btn-lg btn-block" id="submit-button3" disabled>
+                    Pay $25
+                </button>
+
+                <div class="block-for-validate-errors">
+                    <p id="errors3" class="help-block animated"></p>
+                </div>
+
+                <div style="display:none;" id="checkout-form-errors3">
+                    <div class="col-xs-12">
+                        <p class="payment-errors"></p>
+                    </div>
+                </div>
+
+            </form>
+
             <!-- CREDIT CARD FORM ENDS HERE -->
         </div>
     </div>
@@ -256,102 +301,116 @@
 
 <hr>
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-            <!-- CREDIT CARD FORM STARTS HERE -->
-            <div class="panel panel-default credit-card-box">
-                <div class="panel-body">
-                    <form role="form" id="checkout-form3">
-                        <div class="row">
-                            <div class="col-xs-8 col-md-8">
-                                <div class="form-group" id="card-number-group3">
-                                    <label for="card-number-container3" class="control-label">CARD NUMBER</label>
-                                    <div class="input-group input-group-lg">
-                                        <div id="card-number-container3" class="form-control input-lg"></div>
-                                        <span class="input-group-addon"><i class="fas fa-credit-card" id="card-provider3"></i></span>
+<div class="container fourth-example">
+    <div class="row justify-content-md-center">
+        <div class="col-lg-8 col-md-10 col-xs-10 wrap-block">
+
+
+            <button type="button" class="btn btn-primary btn-open-pay-form" data-toggle="modal"
+                    data-target="#payWithCardModal">
+                Pay with card
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="payWithCardModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <!-- CREDIT CARD FORM STARTS HERE -->
+                            <!--<button type="button" class="close btn-close-pay-form" data-dismiss="modal" aria-label="Close">-->
+                            <!--<span aria-hidden="true">&times;</span>-->
+                            <!--</button>-->
+                            <form role="form" id="checkout-form4">
+                                <div class="row row-wrap-for-all-input">
+                                    <div class="col-12">
+                                        <div class="line-for-several-input">
+                                            <div class="wrap-for-input  input-all-width">
+                                                <div class="input-group" id="first-name-group4">
+                                                    <div class="for-icon"><i class="fas fa-user"></i></div>
+                                                    <div id="first-name-container4" class="form-control"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="wrap-for-input  input-all-width">
+                                                <div class="input-group" id="last-name-group4">
+                                                    <div class="for-icon"><i class="fas fa-user-tie"></i></div>
+                                                    <div id="last-name-container4" class="form-control"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="wrap-for-input  input-all-width">
+                                                <div class="input-group" id="email-group4">
+                                                    <div class="for-icon"><i class="far fa-envelope"></i></div>
+                                                    <div id="email-container4" class="form-control"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="wrap-for-input  input-all-width">
+                                                <div class="input-group" id="phone-group4">
+                                                    <div class="for-icon"><i class="fas fa-mobile-alt"></i></div>
+                                                    <div id="phone-container4" class="form-control"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="wrap-for-input  input-all-width">
+                                                <div class="input-group" id="social-id-group4">
+                                                    <div class="for-icon"><i class="far fa-id-card"></i></div>
+                                                    <div id="social-id-container4" class="form-control"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="line-for-several-input">
+                                            <div class="wrap-for-input input-all-width">
+                                                <div class="input-group" id="card-number-group4">
+                                                    <div class="for-icon"><i class="fas fa-credit-card"
+                                                                             id="card-provider4"></i></div>
+                                                    <div id="card-number-container4" class="form-control"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="wrap-for-input  input-half-width">
+                                                <div class="input-group" id="card-expiration-group4">
+                                                    <div id="card-expiration-container4" class="form-control"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="wrap-for-input  input-half-width">
+                                                <div class="input-group" id="card-cvv-group4">
+                                                    <div id="card-cvv-container4" class="form-control"></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-12">
+                                        <button class="subscribe btn btn-lg btn-block" id="submit-button4" disabled>
+                                            Pay $25
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xs-4 col-md-4">
-                                <div class="form-group" id="social-id-group3">
-                                    <label for="social-id-container3" class="control-label">SOCIAL ID</label>
-                                    <div id="social-id-container3" class="form-control input-lg"></div>
-                                    <p id="social-id-messages3" class="help-block" style="display: none;"></p>
+
+                                <div class="block-for-validate-errors">
+                                    <p id="errors4" class="help-block animated"></p>
                                 </div>
-                            </div>
+
+                                <div class="row" style="display:none;" id="checkout-form-errors4">
+                                    <div class="col-xs-12">
+                                        <p class="payment-errors"></p>
+                                    </div>
+                                </div>
+
+                            </form>
+                            <!-- CREDIT CARD FORM ENDS HERE -->
                         </div>
 
-                        <div class="row">
-                            <div class="col-xs-7 col-md-7">
-                                <div class="form-group" id="card-expiration-group3">
-                                    <label for="card-expiration-container3" class="control-label">EXPIRATION DATE</label>
-                                    <div id="card-expiration-container3" class="form-control input-lg"></div>
-                                    <p id="card-expiration-messages3" class="help-block" style="display: none;"></p>
-                                </div>
-                            </div>
-                            <div class="col-xs-5 col-md-5 pull-right">
-                                <div class="form-group" id="card-cvv-group3">
-                                    <label for="card-cvv-container3" class="control-label">CV CODE</label>
-                                    <div id="card-cvv-container3" class="form-control input-lg"></div>
-                                    <p id="card-cvv-messages3" class="help-block" style="display: none;"></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-6 col-md-6">
-                                <div class="form-group" id="first-name-group3">
-                                    <label for="first-name-container3" class="control-label">FIRST NAME</label>
-                                    <div id="first-name-container3" class="form-control input-lg"></div>
-                                    <p id="first-name-messages3" class="help-block" style="display: none;"></p>
-                                </div>
-                            </div>
-                            <div class="col-xs-6 col-md-6">
-                                <div class="form-group" id="last-name-group3">
-                                    <label for="last-name-container3" class="control-label">LAST NAME</label>
-                                    <div id="last-name-container3" class="form-control input-lg"></div>
-                                    <p id="last-name-messages3" class="help-block" style="display: none;"></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-6 col-md-6">
-                                <div class="form-group" id="email-group3">
-                                    <label for="email-container3" class="control-label">EMAIL</label>
-                                    <div id="email-container3" class="form-control input-lg"></div>
-                                    <p id="email-messages3" class="help-block" style="display: none;"></p>
-                                </div>
-                            </div>
-                            <div class="col-xs-6 col-md-6">
-                                <div class="form-group" id="phone-group3">
-                                    <label for="phone-container3" class="control-label">PHONE NUMBER</label>
-                                    <div id="phone-container3" class="form-control input-lg"></div>
-                                    <p id="phone-messages3" class="help-block" style="display: none;"></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button class="subscribe btn btn-success btn-lg btn-block" id="submit-button3" disabled>
-                                    Pay 55.00 ILS
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="row" style="display:none;" id="checkout-form-errors3">
-                            <div class="col-xs-12">
-                                <p class="payment-errors"></p>
-                            </div>
-                        </div>
-
-                    </form>
+                    </div>
                 </div>
             </div>
-            <!-- CREDIT CARD FORM ENDS HERE -->
+
         </div>
     </div>
 </div>
@@ -361,6 +420,8 @@
 <script src="js/common.min.js"></script>
 <script src="js/exemple1.js"></script>
 <script src="js/exemple2.js"></script>
+<script src="js/exemple3.js"></script>
+<script src="js/exemple4.js"></script>
 
 </body>
 

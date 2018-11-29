@@ -55,6 +55,7 @@ gulp.task('watch', ['scss', 'concat-libs-js', 'babel-common-js', 'browser-sync']
     gulp.watch(['app/js/common.min.js'], ['babel-common-js'], browserSync.reload);
     gulp.watch(['app/js/exemple1.js'], ['babel-common-js'], browserSync.reload);
     gulp.watch(['app/js/exemple2.js'], ['babel-common-js'], browserSync.reload);
+    gulp.watch(['app/js/exemple3.js'], ['babel-common-js'], browserSync.reload);
     gulp.watch('app/*.html', browserSync.reload);
 });
 

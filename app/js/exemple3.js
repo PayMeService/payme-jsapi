@@ -4,41 +4,29 @@
 // HELPERS ---------------------------------------------------------------------------------
 (function (global) {
     const mpl = 'MPL15282-97137EVV-KOAOAOIT-VWCZPB8V';
+    const consolePre = document.getElementById('console-pre3');
 
-    const consolePre = document.getElementById('console-pre');
     const form = document.getElementById('checkout-form');
-    const cardProvider = document.getElementById('card-provider');
+    const errorsMessages = document.getElementById('errors3');
 
-    const errorsMessages = document.getElementById('errors');
+    const numberGroup = document.getElementById('card-number-group3');
 
-    const numberGroup = document.getElementById('card-number-group');
-// const numberMessages = document.getElementById('errors');
+    const expirationGroup = document.getElementById('card-expiration-group3');
 
-    const expirationGroup = document.getElementById('card-expiration-group');
-// const expirationMessages = document.getElementById('errors');
+    const cvcGroup = document.getElementById('card-cvv-group3');
 
-    const cvcGroup = document.getElementById('card-cvv-group');
-// const cvcMessages = document.getElementById('errors');
+    const firstNameGroup = document.getElementById('first-name-group3');
 
-    const firstNameGroup = document.getElementById('first-name-group');
-// const firstNameMessages = document.getElementById('errors');
+    const lastNameroup = document.getElementById('last-name-group3');
 
-    const lastNameGroup = document.getElementById('last-name-group');
-// const lastNameMessages = document.getElementById('errors');
+    const emailGroup = document.getElementById('email-group3');
 
-    const emailGroup = document.getElementById('email-group');
-// const emailMessages = document.getElementById('errors');
+    const phoneGroup = document.getElementById('phone-group3');
 
-    const phoneGroup = document.getElementById('phone-group');
-// const phoneMessages = document.getElementById('errors');
+    const socialIdGroup = document.getElementById('social-id-group3');
 
-    const socialIdGroup = document.getElementById('social-id-group');
-// const socialIdMessages = document.getElementById('errors');
+    const submitButton = document.getElementById('submit-button3');
 
-
-// -----------------------------------------------------------------------------------------------------------------
-
-    const submitButton = document.getElementById('submit-button');
     submitButton.disabled = true;
 
     function tokenizationStarted() {
@@ -53,13 +41,10 @@
 
     const errorsFromField = {};
 
+
     function showErrors(errorsFromField, el, ev) {
-        console.log(el);
-        // var length = Object.keys(errorsFromField).length;
         var highest = errorsFromField[Object.keys(errorsFromField).sort().pop()];
         el.classList.remove('fadeOutDown');
-        // el.classList.remove('fadeInUp');
-        console.log(ev.message);
         if (!ev.message) {
             el.innerText = highest;
         } else {
@@ -68,13 +53,11 @@
     }
 
     function toggleValidationMessages(wrapper, ev) {
-        console.log(errorsFromField);
         if (ev.isValid) {
             wrapper.classList.remove('has-error');
             this.classList.remove('fadeInUp');
             this.classList.add('fadeOutDown');
             delete errorsFromField[ev.field]; // УДАЛЯЕМ КОНкретный эллемент из объекта который прошел валидацию
-
             if (Object.keys(errorsFromField).length > 0) { // если в объекте еще остались ошибки выводим их
                 showErrors(errorsFromField, this, ev);
                 this.classList.remove('fadeOutDown');
@@ -83,7 +66,6 @@
         } else {
             errorsFromField[ev.field] = ev.message; //ЗАПИСЫВАЕМ ошибки в объект
             wrapper.classList.add('has-error');
-            console.log(this);
             this.classList.remove('fadeOutDown');
             this.classList.add('fadeInUp');
             if (Object.keys(errorsFromField).length > 0) { //проверяем есть ли в обьекте еще какие то элементы
@@ -92,26 +74,26 @@
         }
     }
 
-    function changeCardProviderIcon(cardVendor) {
+    // function changeCardProviderIcon(cardVendor) {
+    //
+    //     const vendorsToClasses = {
+    //         'unknown': ['fas', 'fa-credit-card'],
+    //
+    //         'amex': ['fab', 'fa-cc-amex'],
+    //         'diners': ['fab', 'fa-cc-diners-club'],
+    //         'jcb': ['fab', 'fa-cc-jcb'],
+    //         'visa': ['fab', 'fa-cc-visa'],
+    //         'mastercard': ['fab', 'fa-cc-mastercard'],
+    //         'discover': ['fab', 'fa-cc-discover'],
+    //     };
+    //
+    //     cardProvider2.classList.remove(...cardProvider2.classList);
+    //     cardProvider2.classList.add(...(vendorsToClasses[cardVendor] ? vendorsToClasses[cardVendor] : vendorsToClasses['unknown']));
+    // }
 
-        const vendorsToClasses = {
-            'unknown': ['fas', 'fa-credit-card'],
-
-            'amex': ['fab', 'fa-cc-amex'],
-            'diners': ['fab', 'fa-cc-diners-club'],
-            'jcb': ['fab', 'fa-cc-jcb'],
-            'visa': ['fab', 'fa-cc-visa'],
-            'mastercard': ['fab', 'fa-cc-mastercard'],
-            'discover': ['fab', 'fa-cc-discover'],
-        };
-
-        cardProvider.classList.remove(...cardProvider.classList);
-        cardProvider.classList.add(...(vendorsToClasses[cardVendor] ? vendorsToClasses[cardVendor] : vendorsToClasses['unknown']));
-    }
-
-// -----------------------------------------------------------------------------------------------------------------
 
     const allFieldsReady = [];
+
 
     PayMe.create(mpl, {
         testMode: true
@@ -120,189 +102,156 @@
         const fields = instance.hostedFields();
 
         const cardNumberSettings = {
-            placeholder: 'Credit Card Number',
-            messages: {
-                invalid: 'Bad credit card number',
-                required: 'Field "Card Number" is mandatory'
-            },
+            placeholder: ' ',
+            messages: {invalid: 'Bad credit card number'},
             styles: {
                 base: {
                     'font-size': '16px',
-                    '::placeholder': {'color': '#86B0FE'}
-                },
-                invalid: {
-                    'color': 'red',
-                },
-                valid: {
-                    'color': '#fff',
-                },
-            }
-        };
-
-        const firstNameField = {
-            placeholder: 'First name',
-            messages: {
-                invalid: 'Letters only for field "First name"',
-                required: 'Field "First name" is mandatory'
-            },
-            styles: {
-                base: {
-                    'color': '#fff',
-                    'font-size': '16px',
-                    'letter-spacing': '1px',
-                    '::placeholder': {'color': '#84ABFF'}
+                    'color': '#000',
+                    'height': '50px',
                 },
                 invalid: {
                     'color': 'red'
                 },
                 valid: {
-                    'color': '#fff'
+                    'color': '#000'
+                }
+            }
+        };
+        const firstNameField = {
+            placeholder: ' ',
+            styles: {
+                base: {
+                    'font-size': '16px',
+                    'color': '#000',
+                    'height': '50px',
+                },
+                invalid: {
+                    'color': 'red'
+                },
+                valid: {
+                    'color': '#000'
                 }
             }
         };
 
-        const lastNameField = {
-            placeholder: 'Last name',
-            messages: {
-                invalid: 'Letters only for field "Last name"',
-                required: 'Field "Last name" is mandatory'
-            },
+        const lastNameield = {
+            placeholder: ' ',
             styles: {
                 base: {
-                    'color': '#fff',
                     'font-size': '16px',
-                    'letter-spacing': '1px',
-                    '::placeholder': {'color': '#84ABFF'}
+                    'color': '#000',
                 },
                 invalid: {
                     'color': 'red'
                 },
                 valid: {
-                    'color': '#fff'
+                    'color': '#000'
                 }
             }
         };
 
         const emailField = {
-            messages: {
-                invalid: 'Invalid Email',
-                required: 'Field "Email" is mandatory'
-            },
+            placeholder: ' ',
             styles: {
                 base: {
-                    'color': '#fff',
                     'font-size': '16px',
-                    'letter-spacing': '1px',
-                    '::placeholder': {'color': '#84ABFF'}
-
+                    'color': '#000',
                 },
                 invalid: {
                     'color': 'red'
                 },
                 valid: {
-                    'color': '#fff'
+                    'color': '#000'
                 }
             }
         };
 
         const phoneField = {
-            messages: {
-                invalid: 'Invalid Phone',
-                required: 'Field "Phone" is mandatory'
-            },
+            placeholder: ' ',
             styles: {
                 base: {
-                    'color': '#fff',
                     'font-size': '16px',
-                    'letter-spacing': '1px',
-                    '::placeholder': {'color': '#84ABFF'}
-
+                    'color': '#000',
                 },
                 invalid: {
                     'color': 'red'
                 },
                 valid: {
-                    'color': '#fff'
+                    'color': '#000'
                 }
             }
         };
 
         const socialIdField = {
-            messages: {
-                required: 'Field "Social Id" is mandatory'
-            },
+            placeholder: ' ',
             styles: {
                 base: {
-                    'color': '#fff',
                     'font-size': '16px',
-                    'letter-spacing': '1px',
-                    '::placeholder': {'color': '#84ABFF'}
+                    'color': '#000',
                 },
                 invalid: {
                     'color': 'red'
                 },
                 valid: {
-                    'color': '#fff'
+                    'color': '#000'
                 }
             }
         };
         const cvcField = {
-            messages: {
-                invalid: 'Invalid CVC',
-                required: 'Field "CVC" is mandatory'
-            },
-            placeholder: 'CVV',
+            placeholder: ' ',
             styles: {
                 base: {
-                    'color': '#fff',
                     'font-size': '16px',
-                    'letter-spacing': '1px',
-                    '::placeholder': {'color': '#84ABFF'}
+                    'color': '#000',
                 },
                 invalid: {
                     'color': 'red'
                 },
                 valid: {
-                    'color': '#fff'
+                    'color': '#000'
                 }
             }
         };
         const expirationField = {
-            messages: {
-                invalid: 'Invalid Expiration',
-                required: 'Field "Expiration" is mandatory'
-            },
+            placeholder: ' ',
             styles: {
                 base: {
-                    'color': '#fff',
                     'font-size': '16px',
-                    'letter-spacing': '1px',
-                    '::placeholder': {'color': '#84ABFF'}
+                    'color': '#000',
                 },
                 invalid: {
                     'color': 'red'
                 },
                 valid: {
-                    'color': '#fff'
+                    'color': '#000'
                 },
-                '::placholder': ''
+
             }
         };
+
+
         const cardNumber = fields.create(PayMe.fields.NUMBER, cardNumberSettings);
         allFieldsReady.push(
-            cardNumber.mount('#card-number-container')
+            cardNumber.mount('#card-number-container3')
         );
-        cardNumber.on('card-type-changed', ev => changeCardProviderIcon(ev.cardType));
         cardNumber.on('keyup', toggleValidationMessages.bind(errorsMessages, numberGroup));
 
         cardNumber.on('change', console.log);
-        cardNumber.on('blur', console.log);
         cardNumber.on('focus', console.log);
+        cardNumber.on('blur', function () {
+            document.querySelectorAll('.third-example label').forEach(function (el, index) {
+                if(cardNumber.getState().isEmpty && el.getAttribute('for') === 'card-number-container3') {
+                    el.classList.remove('animated-label');
+                }
+            })
+        });
         cardNumber.on('keyup', function (e) {
-            // console.log(this);
+            this.options.styles.base.color = 'green';
+            console.log(this);
         });
         cardNumber.on('keydown', function (e) {
-            // console.log(this.options);
+            console.log(this.options);
         });
         cardNumber.on('keypress', console.log);
         cardNumber.on('validity-changed', console.log);
@@ -310,54 +259,137 @@
 
         const expiration = fields.create(PayMe.fields.EXPIRATION, expirationField);
         allFieldsReady.push(
-            expiration.mount('#card-expiration-container')
+            expiration.mount('#card-expiration-container3')
         );
         expiration.on('keyup', toggleValidationMessages.bind(errorsMessages, expirationGroup));
         expiration.on('validity-changed', toggleValidationMessages.bind(errorsMessages, expirationGroup));
+        expiration.on('blur', function () {
+            document.querySelectorAll('.third-example label').forEach(function (el, index) {
+                if(expiration.getState().isEmpty && el.getAttribute('for') === 'card-expiration-container3') {
+                    el.classList.remove('animated-label');
+                }
+            })
+        });
 
         const cvc = fields.create(PayMe.fields.CVC, cvcField);
         allFieldsReady.push(
-            cvc.mount('#card-cvv-container')
+            cvc.mount('#card-cvv-container3')
         );
         cvc.on('keyup', toggleValidationMessages.bind(errorsMessages, cvcGroup));
         cvc.on('validity-changed', toggleValidationMessages.bind(errorsMessages, cvcGroup));
+        cvc.on('blur', function () {
+            document.querySelectorAll('.third-example label').forEach(function (el, index) {
+                if(cvc.getState().isEmpty && el.getAttribute('for') === 'card-cvv-container3') {
+                    el.classList.remove('animated-label');
+                }
+            })
+        });
 
         const phone = fields.create(PayMe.fields.PHONE, phoneField);
         allFieldsReady.push(
-            phone.mount('#phone-container')
+            phone.mount('#phone-container3')
         );
         phone.on('keyup', toggleValidationMessages.bind(errorsMessages, phoneGroup));
         phone.on('validity-changed', toggleValidationMessages.bind(errorsMessages, phoneGroup));
+        phone.on('blur', function () {
+            document.querySelectorAll('.third-example label').forEach(function (el, index) {
+                if(phone.getState().isEmpty && el.getAttribute('for') === 'phone-container3') {
+                    el.classList.remove('animated-label');
+                }
+            })
+        });
 
         const email = fields.create(PayMe.fields.EMAIL, emailField);
         allFieldsReady.push(
-            email.mount('#email-container')
+            email.mount('#email-container3')
         );
         email.on('keyup', toggleValidationMessages.bind(errorsMessages, emailGroup));
         email.on('validity-changed', toggleValidationMessages.bind(errorsMessages, emailGroup));
+        email.on('blur', function () {
+            document.querySelectorAll('.third-example label').forEach(function (el, index) {
+                if(email.getState().isEmpty && el.getAttribute('for') === 'email-container3') {
+                    el.classList.remove('animated-label');
+                }
+            })
+        });
 
         const firstName = fields.create(PayMe.fields.NAME_FIRST, firstNameField);
         allFieldsReady.push(
-            firstName.mount('#first-name-container')
+            firstName.mount('#first-name-container3')
         );
         firstName.on('keyup', toggleValidationMessages.bind(errorsMessages, firstNameGroup));
         firstName.on('validity-changed', toggleValidationMessages.bind(errorsMessages, firstNameGroup));
+        firstName.on('blur', function () {
+            document.querySelectorAll('.third-example label').forEach(function (el, index) {
+                if(firstName.getState().isEmpty && el.getAttribute('for') === 'first-name-container3') {
+                    el.classList.remove('animated-label');
+                }
+            })
+        });
 
-        const lastName = fields.create(PayMe.fields.NAME_LAST, lastNameField);
+        const lastName = fields.create(PayMe.fields.NAME_LAST, lastNameield);
         allFieldsReady.push(
-            lastName.mount('#last-name-container')
+            lastName.mount('#last-name-container3')
         );
-        lastName.on('keyup', toggleValidationMessages.bind(errorsMessages, lastNameGroup));
-        lastName.on('validity-changed', toggleValidationMessages.bind(errorsMessages, lastNameGroup));
+        lastName.on('keyup', toggleValidationMessages.bind(errorsMessages, lastNameroup));
+        lastName.on('validity-changed', toggleValidationMessages.bind(errorsMessages, lastNameroup));
+        lastName.on('blur', function () {
+            document.querySelectorAll('.third-example label').forEach(function (el, index) {
+                if(lastName.getState().isEmpty && el.getAttribute('for') === 'last-name-container3') {
+                    el.classList.remove('animated-label');
+                }
+            })
+        });
 
         const socialId = fields.create(PayMe.fields.SOCIAL_ID, socialIdField);
         allFieldsReady.push(
-            socialId.mount('#social-id-container')
+            socialId.mount('#social-id-container3')
         );
         socialId.on('keyup', toggleValidationMessages.bind(errorsMessages, socialIdGroup));
         socialId.on('validity-changed', toggleValidationMessages.bind(errorsMessages, socialIdGroup));
+        socialId.on('blur', function () {
+            document.querySelectorAll('.third-example label').forEach(function (el, index) {
+                if(socialId.getState().isEmpty && el.getAttribute('for') === 'social-id-container3') {
+                    el.classList.remove('animated-label');
+                }
+            })
+        });
 
         Promise.all(allFieldsReady).then(() => submitButton.disabled = false);
+
+        document.querySelector('label[for=first-name-container3]').addEventListener('click', function(){
+            this.classList.add('animated-label');
+            firstName.focus();
+        });
+
+        document.querySelector('label[for=last-name-container3]').addEventListener('click', function(){
+            this.classList.add('animated-label');
+            lastName.focus();
+        });
+        document.querySelector('label[for=email-container3]').addEventListener('click', function(){
+            this.classList.add('animated-label');
+            email.focus();
+        });
+        document.querySelector('label[for=phone-container3]').addEventListener('click', function(){
+            this.classList.add('animated-label');
+            phone.focus();
+        });
+        document.querySelector('label[for=card-cvv-container3]').addEventListener('click', function(){
+            this.classList.add('animated-label');
+            cvc.focus();
+        });
+        document.querySelector('label[for=card-expiration-container3]').addEventListener('click', function(){
+            this.classList.add('animated-label');
+            expiration.focus();
+        });
+        document.querySelector('label[for=card-number-container3]').addEventListener('click', function(){
+            this.classList.add('animated-label');
+            cardNumber.focus();
+        });
+        document.querySelector('label[for=social-id-container3]').addEventListener('click', function(){
+            this.classList.add('animated-label');
+            socialId.focus();
+        });
 
         form.addEventListener('submit', ev => {
             ev.preventDefault();
@@ -365,7 +397,7 @@
             const sale = {
 
                 // payerFirstName: 'Vladimir',
-                // payerLastName: 'kondratiev',
+                // payerLastName 'kondratiev',
                 // payerEmail: 'trahomoto@mailforspam.com',
                 // payerPhone: '1231231',
 
@@ -398,45 +430,9 @@
                 });
         });
 
-// document.getElementById('tear-down').addEventListener('click', () => instance.teardown());
+//document.getElementById('tear-down').addEventListener('click', () => instance.teardown());
 
     });
 
 
 })(window);
-
-
-// var frm = document.getElementsByTagName('iframe');
-// console.log(frm[0]);
-
-// window.onload = function() {
-//     var frm = document.getElementsByTagName('iframe');
-//     console.log(frm[0].document.getElementsByTagName('body'));
-//     // var otherhead = frm[0].getElementByTagName("html");
-//     // var link = frm[0].getElementsByTagName("style");
-//     // console.log(link.style.color = 'green');
-//     // link.setAttribute("rel", "stylesheet");
-//     // link.setAttribute("type", "text/css");
-//     // link.setAttribute("href", "css/main.min.css");
-//     // otherhead.appendChild(link);
-// };
-
-
-//
-// // выбираем целевой элемент
-// var target = document.getElementById('errors');
-//
-// // создаём экземпляр MutationObserver
-// var observer = new MutationObserver(function(mutations) {
-//     mutations.forEach(function(mutation) {
-//         // console.log(mutation.target.style.display = 'block');
-//         // console.log(mutation.target.style.display = 'block');
-//     });
-// });
-//
-// // конфигурация нашего observer:
-// var config = { attributes: true, childList: true, characterData: true };
-//
-// // передаём в качестве аргументов целевой элемент и его конфигурацию
-// observer.observe(target, config);
-
