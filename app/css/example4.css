@@ -127,3 +127,65 @@
 .fourth-example .has-error .for-icon {
     color: red;
 }
+
+.fourth-example .success{
+    max-width: 450px;
+    margin: 0 auto;
+    background: #619D9E;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    color: #ffffff;
+    position: relative;
+}
+
+.fourth-example .success span{
+    min-width: 80px;
+}
+
+.fourth-example .success .query-info{
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    border-bottom: 1px solid #158A89;
+}
+
+.fourth-example .success .back-on-form4{
+    font-size: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.fourth-example .wrap-loading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0, 0.4);
+}
+
+.fourth-example .loading {
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+    width: 50px;
+    height: 50px;
+    border: .5rem solid rgba(0,0,0, 0.6);
+    border-top-color: rgb(255,255,255);
+    animation: spin 1s infinite linear;
+}

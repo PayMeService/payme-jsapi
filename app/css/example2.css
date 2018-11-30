@@ -154,6 +154,7 @@
     padding: 15px;
     color: #ffffff;
     margin-top: 100px;
+    position: relative;
 }
 
 .second-example .success span{
@@ -171,4 +172,34 @@
     font-size: 25px;
     text-align: center;
     cursor: pointer;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.second-example .wrap-loading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0, 0.4);
+}
+
+.second-example .loading {
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+    width: 50px;
+    height: 50px;
+    border: .5rem solid rgba(0,0,0, 0.6);
+    border-top-color: rgb(255,255,255);
+    animation: spin 1s infinite linear;
 }
