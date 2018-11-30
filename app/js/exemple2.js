@@ -67,7 +67,6 @@
             errorsFromField[ev.field] = ev.message; // write errors to the object
             wrapper.classList.add('has-error');
             wrapper.classList.remove('color-for-field');
-            console.log(wrapper);
             this.classList.remove('fadeOutDown');
             this.classList.add('fadeInUp');
             if (Object.keys(errorsFromField).length > 0) { // check if there is an error in the object
@@ -84,12 +83,13 @@
         document.getElementById(fieldId).classList.remove(className);
     }
 
-    document.querySelector('.back-on-form2').onclick = () => {
-        document.querySelector('.second-example .success').style.display = 'none';
-        form.classList.remove('fadeOut');
-        form.classList.add('fadeIn');
-        form.style.display = 'block';
-    };
+    function showSuccessQuery(data) {
+        successQuery.querySelector('.name').innerHTML = "<span>Name:</span> " + data.payerName;
+        successQuery.querySelector('.email').innerHTML = "<span>Email:</span> " + data.payerEmail;
+        successQuery.querySelector('.phone').innerHTML = "<span>Phone:</span> " + data.payerPhone;
+        successQuery.querySelector('.socialId').innerHTML = "<span>Social Id:</span> " + data.payerSocialId;
+        successQuery.querySelector('.token').innerHTML = "<span>Token:</span> " + data.token;
+    }
 
 // -----------------------------------------------------------------------------------------------------------------
 
@@ -285,11 +285,8 @@
                 instance.tokenize(sale)
                     .then(data => {
                         console.log('Tokenization result::: ', data);
-                        successQuery.querySelector('.name').innerHTML = "<span>Name:</span> " + data.payerName;
-                        successQuery.querySelector('.email').innerHTML = "<span>Email:</span> " + data.payerEmail;
-                        successQuery.querySelector('.phone').innerHTML = "<span>Phone:</span> " + data.payerPhone;
-                        successQuery.querySelector('.socialId').innerHTML = "<span>Social Id:</span> " + data.payerSocialId;
-                        successQuery.querySelector('.token').innerHTML = "<span>Token:</span> " + data.token;
+
+                        showSuccessQuery(data);
 
                         tokenizationFinished();
                     })
@@ -304,6 +301,9 @@
                 instance.teardown();
                 form.classList.remove('fadeOut');
                 form.classList.add('fadeIn');
+                document.querySelectorAll('.focus-on-field').forEach((el, index) => {
+                    el.classList.remove('focus-on-field');
+                })
                 form.style.display = 'block';
                 init();
             })

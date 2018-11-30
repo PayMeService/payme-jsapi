@@ -17,7 +17,6 @@
     const phoneGroup = document.getElementById('phone-group');
     const socialIdGroup = document.getElementById('social-id-group');
     const successQuery = document.querySelector('.first-example .success');
-
 // -----------------------------------------------------------------------------------------------------------------
 
     const submitButton = document.getElementById('submit-button');
@@ -49,6 +48,19 @@
         } else {
             el.innerText = ev.message;
         }
+    }
+
+    function showSuccessData(data) {
+        const container = document.querySelector('.first-example .success');
+        container.querySelector('.name').innerHTML = "<span>Name:</span> " + data.payerName;
+        container.querySelector('.email').innerHTML = "<span>Email:</span> " + data.payerEmail;
+        container.querySelector('.phone').innerHTML = "<span>Phone:</span> " + data.payerPhone;
+        container.querySelector('.socialId').innerHTML = "<span>Social Id:</span> " + data.payerSocialId;
+        container.querySelector('.token').innerHTML = "<span>Token:</span> " + data.token;
+
+        form.style.display = 'none';
+        container.style.display = 'block';
+        container.classList.add('fadeIn');
     }
 
     function toggleValidationMessages(wrapper, ev) {
@@ -94,16 +106,17 @@
     function addClass(fieldId, className) {
         document.getElementById(fieldId).classList.add(className);
     }
+
     function removeClass(fieldId, className) {
         document.getElementById(fieldId).classList.remove(className);
     }
 
     function showSuccessQuery(data) {
-        successQuery.querySelector('.body .name').innerHTML = "<span>Name:</span> " + data.payerName;
-        successQuery.querySelector('.body .email').innerHTML = "<span>Email:</span> " + data.payerEmail;
-        successQuery.querySelector('.body .phone').innerHTML = "<span>Phone:</span> " + data.payerPhone;
-        successQuery.querySelector('.body .socialId').innerHTML = "<span>Social Id:</span> " + data.payerSocialId;
-        successQuery.querySelector('.body .token').innerHTML = "<span>Token:</span> " + data.token;
+        successQuery.querySelector('.name').innerHTML = "<span>Name:</span> " + data.payerName;
+        successQuery.querySelector('.email').innerHTML = "<span>Email:</span> " + data.payerEmail;
+        successQuery.querySelector('.phone').innerHTML = "<span>Phone:</span> " + data.payerPhone;
+        successQuery.querySelector('.socialId').innerHTML = "<span>Social Id:</span> " + data.payerSocialId;
+        successQuery.querySelector('.token').innerHTML = "<span>Token:</span> " + data.token;
     }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -204,7 +217,9 @@
             cardNumber.on('card-type-changed', ev => changeCardProviderIcon(ev.cardType));
             cardNumber.on('keyup', toggleValidationMessages.bind(errorsMessages, numberGroup));
             cardNumber.on('keyup', (e) => {
-                if(e.isValid){expiration.focus()}
+                if (e.isValid) {
+                    expiration.focus();
+                }
                 e.isEmpty ? removeClass('card-expiration-group', 'animate-card-option') : addClass('card-expiration-group', 'animate-card-option');
                 e.isEmpty ? removeClass('card-cvv-group', 'animate-card-option') : addClass('card-cvv-group', 'animate-card-option');
             });
@@ -216,7 +231,11 @@
             );
             expiration.on('keyup', toggleValidationMessages.bind(errorsMessages, expirationGroup));
             expiration.on('validity-changed', toggleValidationMessages.bind(errorsMessages, expirationGroup));
-            expiration.on('keyup', (e) => {if(e.isValid){cvc.focus()}});
+            expiration.on('keyup', (e) => {
+                if (e.isValid) {
+                    cvc.focus();
+                }
+            });
 
 
             const cvc = fields.create(PayMe.fields.CVC, cvcField);
@@ -312,7 +331,7 @@
                 form.classList.add('fadeIn');
                 form.style.display = 'block';
                 init();
-            })
+            });
 
         });
     }

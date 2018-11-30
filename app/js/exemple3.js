@@ -337,9 +337,9 @@
                 form.classList.remove('fadeOut');
                 form.classList.add('fadeIn');
                 form.style.display = 'block';
-                // document.querySelectorAll('.animated-label').forEach((el, index) => {
-                //     el.classList.remove('animated-label');
-                // })
+                document.querySelectorAll('.animated-label').forEach((el, index) => {
+                    el.classList.remove('animated-label');
+                })
                 init();
             })
 

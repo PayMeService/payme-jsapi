@@ -4,7 +4,7 @@
 // HELPERS ---------------------------------------------------------------------------------
 (function () {
     const mpl = 'MPL15282-97137EVV-KOAOAOIT-VWCZPB8V';
-    const consolePre = document.getElementById('console-pre4');
+
     const cardProvider = document.getElementById('card-provider4');
 
     const form = document.getElementById('checkout-form4');
@@ -88,6 +88,15 @@
         cardProvider.classList.add(...(vendorsToClasses[cardVendor] ? vendorsToClasses[cardVendor] : vendorsToClasses['unknown']));
     }
 
+    function showSuccessQuery(data) {
+        successQuery.querySelector('.name').innerHTML = "<span>Name:</span> " + data.payerName;
+        successQuery.querySelector('.email').innerHTML = "<span>Email:</span> " + data.payerEmail;
+        successQuery.querySelector('.phone').innerHTML = "<span>Phone:</span> " + data.payerPhone;
+        successQuery.querySelector('.socialId').innerHTML = "<span>Social Id:</span> " + data.payerSocialId;
+        successQuery.querySelector('.token').innerHTML = "<span>Token:</span> " + data.token;
+    }
+
+// -----------------------------------------------------------------------------------------------------------------
 
     const allFieldsReady = [];
 
@@ -274,11 +283,7 @@
                 instance.tokenize(sale)
                     .then(data => {
                         console.log('Tokenization result::: ', data);
-                        successQuery.querySelector('.name').innerHTML = "<span>Name:</span> " + data.payerName;
-                        successQuery.querySelector('.email').innerHTML = "<span>Email:</span> " + data.payerEmail;
-                        successQuery.querySelector('.phone').innerHTML = "<span>Phone:</span> " + data.payerPhone;
-                        successQuery.querySelector('.socialId').innerHTML = "<span>Social Id:</span> " + data.payerSocialId;
-                        successQuery.querySelector('.token').innerHTML = "<span>Token:</span> " + data.token;
+                        showSuccessQuery(data);
 
                         tokenizationFinished();
                     })

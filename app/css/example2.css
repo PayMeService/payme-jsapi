@@ -131,12 +131,6 @@
     transition: all .3s;
 }
 
-.second-example .color-for-field .form-control, .second-example .color-for-field .form-control {
-    background: #fff;
-    -webkit-transition: all .3s;
-    transition: all .3s;
-}
-
 .second-example .has-error .form-control {
     background: #F8735E;
     -webkit-transition: all .3s;
