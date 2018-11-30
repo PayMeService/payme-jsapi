@@ -32,11 +32,16 @@
     submitButton.disabled = true;
 
     function tokenizationStarted() {
+        document.getElementById('checkout-form2').classList.add('fadeOut');
         submitButton.disabled = true;
         console.log('Tokenization started!');
     }
 
     function tokenizationFinished() {
+        document.getElementById('checkout-form2').style.display = 'none';
+        document.querySelector('.second-example .success').style.display = 'block';
+        document.querySelector('.second-example .success').classList.add('fadeIn');
+
         submitButton.disabled = false;
         console.log('Tokenization finished!');
     }
@@ -81,8 +86,17 @@
     function addClass(fieldId, className) {
         document.getElementById(fieldId).classList.add(className);
     }
+
     function removeClass(fieldId, className) {
         document.getElementById(fieldId).classList.remove(className);
+    }
+
+    document.querySelector('.back-on-form2').onclick = () => {
+        document.querySelector('.second-example .success').style.display = 'none';
+
+        document.getElementById('checkout-form2').classList.remove('fadeOut');
+        document.getElementById('checkout-form2').classList.add('fadeIn');
+        document.getElementById('checkout-form2').style.display = 'block';
     }
 
 // -----------------------------------------------------------------------------------------------------------------
@@ -278,9 +292,13 @@
             instance.tokenize(sale)
                 .then(data => {
                     console.log('Tokenization result::: ', data);
+                    document.querySelector('.second-example .success .name').innerHTML = "<span>Name:</span> " + data.payerName;
+                    document.querySelector('.second-example .success .email').innerHTML = "<span>Email:</span> " + data.payerEmail;
+                    document.querySelector('.second-example .success .phone').innerHTML = "<span>Phone:</span> " + data.payerPhone;
+                    document.querySelector('.second-example .success .socialId').innerHTML = "<span>Social Id:</span> " + data.payerSocialId;
+                    document.querySelector('.second-example .success .token').innerHTML = "<span>Token:</span> " + data.token;
                     consolePre.innerText = 'Tokenization result::: \r\n';
                     consolePre.innerText = consolePre.innerText + JSON.stringify(data, null, 2);
-
                     tokenizationFinished();
                 })
                 .catch(err => {

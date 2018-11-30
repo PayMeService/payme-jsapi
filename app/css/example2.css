@@ -6,14 +6,16 @@
     background: #555A7F;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    padding: 120px 10px 85px;
     max-width: 750px;
     margin: 0 auto;
+    padding: 20px;
+    min-height: 580px;
 }
 
 .second-example .wrap-block form {
     max-width: 475px;
     margin: 0 auto;
+    margin-top: 100px;
 }
 
 .second-example .form-control, .first-example .input-group-text {
@@ -139,4 +141,34 @@
     background: #F8735E;
     -webkit-transition: all .3s;
     transition: all .3s;
+}
+
+.second-example .success{
+    max-width: 450px;
+    margin: 0 auto;
+    background: #7482A7;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    color: #ffffff;
+    margin-top: 100px;
+}
+
+.second-example .success span{
+    min-width: 80px;
+}
+
+.second-example .success .query-info{
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+}
+
+.second-example .success .back-on-form2{
+    font-size: 25px;
+    text-align: center;
+    cursor: pointer;
 }
