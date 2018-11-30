@@ -51,19 +51,6 @@
     }
   }
 
-  function showSuccessData(data) {
-    const container = document.querySelector('.first-example .success');
-    container.querySelector('.name').innerHTML = "<span>Name:</span> " + data.payerName;
-    container.querySelector('.email').innerHTML = "<span>Email:</span> " + data.payerEmail;
-    container.querySelector('.phone').innerHTML = "<span>Phone:</span> " + data.payerPhone;
-    container.querySelector('.socialId').innerHTML = "<span>Social Id:</span> " + data.payerSocialId;
-    container.querySelector('.token').innerHTML = "<span>Token:</span> " + data.token;
-
-    form.style.display = 'none';
-    container.style.display = 'block';
-    container.classList.add('fadeIn');
-  }
-
   function toggleValidationMessages(wrapper, ev) {
     if (ev.isValid) {
       wrapper.classList.remove('has-error');
@@ -291,7 +278,6 @@
       const formSubmit = ev => {
         ev.preventDefault();
 
-
         const sale = {
           // payerFirstName: 'Vladimir',
           // payerLastName: 'kondratiev',
@@ -321,17 +307,21 @@
           })
           .catch(err => {
             console.error(err);
-            // tokenizationFinished();
+            alert('Tokenization failed');
+            successQuery.style.display = 'none';
+            form.style.display = 'block';
+            form.classList.remove('fadeOut');
+            tokenizationFinished();
           });
       };
 
-      const clickListener = () => {
+      const clickToBackOnForm = () => {
         successQuery.style.display = 'none';
 
         instance.teardown();
 
         form.removeEventListener('submit', formSubmit);
-        backFormButton.removeEventListener('click', clickListener);
+        backFormButton.removeEventListener('click', clickToBackOnForm);
 
         form.classList.remove('fadeOut');
         form.classList.add('fadeIn');
@@ -340,7 +330,7 @@
       };
 
       form.addEventListener('submit', formSubmit);
-      backFormButton.addEventListener('click', clickListener);
+      backFormButton.addEventListener('click', clickToBackOnForm);
 
     });
   }

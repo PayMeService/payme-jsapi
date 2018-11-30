@@ -18,6 +18,7 @@
     const socialIdGroup = document.getElementById('social-id-group3');
     const submitButton = document.getElementById('submit-button3');
     const successQuery = document.querySelector('.third-example .success');
+    const backFormButton = document.querySelector('.back-on-form3');
 
     submitButton.disabled = true;
 
@@ -74,10 +75,10 @@
 
     function unfocusFields(currentField, elemId) {
         document.querySelectorAll('.third-example label').forEach((el, index) => {
-            if(currentField.getState().isEmpty && el.getAttribute('for') === elemId) {
+            if (currentField.getState().isEmpty && el.getAttribute('for') === elemId) {
                 el.classList.remove('animated-label');
             }
-        })
+        });
     }
 
     function focusOnField(elemId) {
@@ -266,32 +267,41 @@
 
             Promise.all(allFieldsReady).then(() => submitButton.disabled = false);
 
-            queryLabelFor('first-name-container3').addEventListener('click', () => {
-                firstName.focus();
-            });
-            queryLabelFor('last-name-container3').addEventListener('click', () => {
-                lastName.focus();
-            });
-            queryLabelFor('email-container3').addEventListener('click', () => {
-                email.focus();
-            });
-            queryLabelFor('phone-container3').addEventListener('click', () => {
-                phone.focus();
-            });
-            queryLabelFor('card-cvv-container3').addEventListener('click', () => {
-                cvc.focus();
-            });
-            queryLabelFor('card-expiration-container3').addEventListener('click', () => {
-                expiration.focus();
-            });
-            queryLabelFor('card-number-container3').addEventListener('click', () => {
-                cardNumber.focus();
-            });
-            queryLabelFor('social-id-container3').addEventListener('click', () => {
-                socialId.focus();
-            });
 
-            form.addEventListener('submit', ev => {
+            const firstNameClickLabel = () => {
+                firstName.focus();
+            };
+            queryLabelFor('first-name-container3').addEventListener('click', firstNameClickLabel);
+            const lasttNameClickLabel = () => {
+                lastName.focus();
+            };
+            queryLabelFor('last-name-container3').addEventListener('click', lasttNameClickLabel);
+            const emailClickLabel = () => {
+                email.focus();
+            };
+            queryLabelFor('email-container3').addEventListener('click', emailClickLabel);
+            const phoneClickLabel = () => {
+                phone.focus();
+            };
+            queryLabelFor('phone-container3').addEventListener('click', phoneClickLabel);
+            const cvvClickLabel = () => {
+                cvc.focus();
+            };
+            queryLabelFor('card-cvv-container3').addEventListener('click', cvvClickLabel);
+            const expirationClickLabel = () => {
+                expiration.focus();
+            };
+            queryLabelFor('card-expiration-container3').addEventListener('click', expirationClickLabel);
+            const cardNumberClickLabel = () => {
+                cardNumber.focus();
+            };
+            queryLabelFor('card-number-container3').addEventListener('click', cardNumberClickLabel);
+            const socialIdClickLabel = () => {
+                socialId.focus();
+            };
+            queryLabelFor('social-id-container3').addEventListener('click', socialIdClickLabel);
+
+            const formSubmit = ev => {
                 ev.preventDefault();
 
                 const sale = {
@@ -325,23 +335,41 @@
                     })
                     .catch(err => {
                         console.error(err);
-
+                        alert('Tokenization failed');
+                        successQuery.style.display = 'none';
+                        form.style.display = 'block';
+                        form.classList.remove('fadeOut');
                         tokenizationFinished();
                     });
-            });
+            };
 
-            document.querySelector('.back-on-form3').addEventListener('click', () => {
+            const clickToBackOnForm = () => {
                 successQuery.style.display = 'none';
+
                 instance.teardown();
-                showSuccessQuery(true);
+
+                form.removeEventListener('submit', formSubmit);
+                backFormButton.removeEventListener('click', clickToBackOnForm);
+                queryLabelFor('first-name-container3').removeEventListener('click', firstNameClickLabel);
+                queryLabelFor('last-name-container3').removeEventListener('click', lasttNameClickLabel);
+                queryLabelFor('email-container3').removeEventListener('click', emailClickLabel);
+                queryLabelFor('phone-container3').removeEventListener('click', phoneClickLabel);
+                queryLabelFor('card-cvv-container3').removeEventListener('click', cvvClickLabel);
+                queryLabelFor('card-expiration-container3').removeEventListener('click', expirationClickLabel);
+                queryLabelFor('card-number-container3').removeEventListener('click', cardNumberClickLabel);
+                queryLabelFor('social-id-container3').removeEventListener('click', socialIdClickLabel);
+
                 form.classList.remove('fadeOut');
                 form.classList.add('fadeIn');
                 form.style.display = 'block';
                 document.querySelectorAll('.animated-label').forEach((el, index) => {
                     el.classList.remove('animated-label');
-                })
+                });
                 init();
-            })
+            };
+
+            form.addEventListener('submit', formSubmit);
+            backFormButton.addEventListener('click', clickToBackOnForm);
 
         });
     }

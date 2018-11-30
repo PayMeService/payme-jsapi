@@ -19,6 +19,7 @@
     const socialIdGroup = document.getElementById('social-id-group4');
     const submitButton = document.getElementById('submit-button4');
     const successQuery = document.querySelector('.fourth-example .success');
+    const backFormButton = document.querySelector('.back-on-form4');
 
     submitButton.disabled = true;
 
@@ -256,7 +257,7 @@
 
             Promise.all(allFieldsReady).then(() => submitButton.disabled = false);
 
-            form.addEventListener('submit', ev => {
+            const formSubmit = ev => {
                 ev.preventDefault();
 
                 const sale = {
@@ -289,18 +290,31 @@
                     })
                     .catch(err => {
                         console.error(err);
+                        alert('Tokenization failed');
+                        successQuery.style.display = 'none';
+                        form.style.display = 'block';
+                        form.classList.remove('fadeOut');
                         tokenizationFinished();
                     });
-            });
+            };
 
-            document.querySelector('.back-on-form4').addEventListener('click', () => {
+            const clickToBackOnForm = () => {
                 successQuery.style.display = 'none';
+
                 instance.teardown();
+
+                form.removeEventListener('submit', formSubmit);
+                backFormButton.removeEventListener('click', clickToBackOnForm);
+
                 form.classList.remove('fadeOut');
                 form.classList.add('fadeIn');
                 form.style.display = 'block';
                 init();
-            })
+            };
+
+            form.addEventListener('submit', formSubmit);
+            backFormButton.addEventListener('click', clickToBackOnForm);
+
 
         });
     }

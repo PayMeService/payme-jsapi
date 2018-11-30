@@ -17,6 +17,7 @@
     const phoneGroup = document.getElementById('phone-group2');
     const socialIdGroup = document.getElementById('social-id-group2');
     const successQuery = document.querySelector('.second-example .success');
+    const backFormButton = document.querySelector('.back-on-form2');
 
 // -----------------------------------------------------------------------------------------------------------------
 
@@ -79,8 +80,10 @@
         document.getElementById(fieldId).classList.add(className);
     }
 
-    function removeClass(fieldId, className) {
-        document.getElementById(fieldId).classList.remove(className);
+    function removeClass(fieldId, className, fieldOptions) {
+        if(fieldOptions.getState().isEmpty) {
+            document.getElementById(fieldId).classList.remove(className);
+        }
     }
 
     function showSuccessQuery(data) {
@@ -190,7 +193,7 @@
                 cardNumber.mount('#card-number-container2')
             );
             cardNumber.on('keyup', toggleValidationMessages.bind(errorsMessages, numberGroup));
-            cardNumber.on('blur', () => removeClass('card-number-container2', 'focus-on-field'));
+            cardNumber.on('blur', () => removeClass('card-number-container2', 'focus-on-field', cardNumber));
             cardNumber.on('focus', () => addClass('card-number-container2', 'focus-on-field'));
 
             const expiration = fields.create(PayMe.fields.EXPIRATION, expirationField);
@@ -199,7 +202,7 @@
             );
             expiration.on('keyup', toggleValidationMessages.bind(errorsMessages, expirationGroup));
             expiration.on('validity-changed', toggleValidationMessages.bind(errorsMessages, expirationGroup));
-            expiration.on('blur', () => removeClass('card-expiration-container2', 'focus-on-field'));
+            expiration.on('blur', () => removeClass('card-expiration-container2', 'focus-on-field', expiration));
             expiration.on('focus', () => addClass('card-expiration-container2', 'focus-on-field'));
 
             const cvc = fields.create(PayMe.fields.CVC, cvcField);
@@ -208,7 +211,7 @@
             );
             cvc.on('keyup', toggleValidationMessages.bind(errorsMessages, cvcGroup));
             cvc.on('validity-changed', toggleValidationMessages.bind(errorsMessages, cvcGroup));
-            cvc.on('blur', () => removeClass('card-cvv-container2', 'focus-on-field'));
+            cvc.on('blur', () => removeClass('card-cvv-container2', 'focus-on-field', cvc));
             cvc.on('focus', () => addClass('card-cvv-container2', 'focus-on-field'));
 
             const phone = fields.create(PayMe.fields.PHONE, phoneField);
@@ -217,7 +220,7 @@
             );
             phone.on('keyup', toggleValidationMessages.bind(errorsMessages, phoneGroup));
             phone.on('validity-changed', toggleValidationMessages.bind(errorsMessages, phoneGroup));
-            phone.on('blur', () => removeClass('phone-container2', 'focus-on-field'));
+            phone.on('blur', () => removeClass('phone-container2', 'focus-on-field', phone));
             phone.on('focus', () => addClass('phone-container2', 'focus-on-field'));
 
             const email = fields.create(PayMe.fields.EMAIL, emailField);
@@ -226,7 +229,7 @@
             );
             email.on('keyup', toggleValidationMessages.bind(errorsMessages, emailGroup));
             email.on('validity-changed', toggleValidationMessages.bind(errorsMessages, emailGroup));
-            email.on('blur', () => removeClass('email-container2', 'focus-on-field'));
+            email.on('blur', () => removeClass('email-container2', 'focus-on-field', email));
             email.on('focus', () => addClass('email-container2', 'focus-on-field'));
 
             const firstName = fields.create(PayMe.fields.NAME_FIRST, firstNameField);
@@ -235,7 +238,7 @@
             );
             firstName.on('keyup', toggleValidationMessages.bind(errorsMessages, firstNameGroup));
             firstName.on('validity-changed', toggleValidationMessages.bind(errorsMessages, firstNameGroup));
-            firstName.on('blur', () => removeClass('first-name-container2', 'focus-on-field'));
+            firstName.on('blur', () => removeClass('first-name-container2', 'focus-on-field', firstName));
             firstName.on('focus', () => addClass('first-name-container2', 'focus-on-field'));
 
             const lastName = fields.create(PayMe.fields.NAME_LAST, lastNameField);
@@ -244,7 +247,7 @@
             );
             lastName.on('keyup', toggleValidationMessages.bind(errorsMessages, lastNameGroup));
             lastName.on('validity-changed', toggleValidationMessages.bind(errorsMessages, lastNameGroup));
-            lastName.on('blur', () => removeClass('last-name-container2', 'focus-on-field'));
+            lastName.on('blur', () => removeClass('last-name-container2', 'focus-on-field', lastName));
             lastName.on('focus', () => addClass('last-name-container2', 'focus-on-field'));
 
             const socialId = fields.create(PayMe.fields.SOCIAL_ID, socialIdField);
@@ -253,12 +256,12 @@
             );
             socialId.on('keyup', toggleValidationMessages.bind(errorsMessages, socialIdGroup));
             socialId.on('validity-changed', toggleValidationMessages.bind(errorsMessages, socialIdGroup));
-            socialId.on('blur', () => removeClass('social-id-container2', 'focus-on-field'));
+            socialId.on('blur', () => removeClass('social-id-container2', 'focus-on-field', socialId));
             socialId.on('focus', () => addClass('social-id-container2', 'focus-on-field'));
 
             Promise.all(allFieldsReady).then(() => submitButton.disabled = false);
 
-            form.addEventListener('submit', ev => {
+            const formSubmit = ev => {
                 ev.preventDefault();
 
                 const sale = {
@@ -292,13 +295,22 @@
                     })
                     .catch(err => {
                         console.error(err);
+                        alert('Tokenization failed');
+                        successQuery.style.display = 'none';
+                        form.style.display = 'block';
+                        form.classList.remove('fadeOut');
                         tokenizationFinished();
                     });
-            });
+            };
 
-            document.querySelector('.back-on-form2').addEventListener('click', () => {
+            const clickToBackOnForm = () => {
                 successQuery.style.display = 'none';
+
                 instance.teardown();
+
+                form.removeEventListener('submit', formSubmit);
+                backFormButton.removeEventListener('click', clickToBackOnForm);
+
                 form.classList.remove('fadeOut');
                 form.classList.add('fadeIn');
                 document.querySelectorAll('.focus-on-field').forEach((el, index) => {
@@ -306,7 +318,11 @@
                 })
                 form.style.display = 'block';
                 init();
-            })
+            };
+
+            form.addEventListener('submit', formSubmit);
+            backFormButton.addEventListener('click', clickToBackOnForm);
+
         });
     }
 
