@@ -124,20 +124,20 @@
             const fields = instance.hostedFields();
 
             const cardNumberSettings = {
+                ...DEFAULT_SETTINGS,
                 placeholder: '1234 1234 1234 1234',
                 messages: {
                     invalid: 'Bad credit card number',
                     required: 'Field "Card Number" is mandatory'
                 },
-                ...DEFAULT_SETTINGS,
             };
             const firstNameField = {
+                ...DEFAULT_SETTINGS,
                 placeholder: 'First name',
                 messages: {
                     invalid: 'Letters only for field "First name"',
                     required: 'Field "First name" is mandatory'
                 },
-                ...DEFAULT_SETTINGS,
             };
 
             const lastNameField = {
@@ -150,45 +150,45 @@
             };
 
             const emailField = {
+                ...DEFAULT_SETTINGS,
                 placeholder: 'Email',
                 messages: {
                     invalid: 'Invalid Email',
                     required: 'Field "Email" is mandatory'
                 },
-                ...DEFAULT_SETTINGS,
             };
 
             const phoneField = {
+                ...DEFAULT_SETTINGS,
                 placeholder: 'Phone',
                 messages: {
                     invalid: 'Invalid Phone',
                     required: 'Field "Phone" is mandatory'
                 },
-                ...DEFAULT_SETTINGS,
             };
 
             const socialIdField = {
+                ...DEFAULT_SETTINGS,
                 placeholder: 'Social ID',
                 messages: {
                     invalid: 'Invalid Phone',
                     required: 'Field "Social Id" is mandatory'
                 },
-                ...DEFAULT_SETTINGS,
             };
             const cvcField = {
+                ...DEFAULT_SETTINGS,
                 placeholder: 'CVC',
                 messages: {
                     invalid: 'Invalid CVC',
                     required: 'Field "CVC" is mandatory'
                 },
-                ...DEFAULT_SETTINGS,
             };
             const expirationField = {
+                ...DEFAULT_SETTINGS,
                 messages: {
                     invalid: 'Invalid Expiration',
                     required: 'Field "Expiration" is mandatory'
                 },
-                ...DEFAULT_SETTINGS,
             };
 
             const cardNumber = fields.create(PayMe.fields.NUMBER, cardNumberSettings);
@@ -285,7 +285,6 @@
                     .then(data => {
                         console.log('Tokenization result::: ', data);
                         showSuccessQuery(data);
-
                         tokenizationFinished();
                     })
                     .catch(err => {
