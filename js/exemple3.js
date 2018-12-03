@@ -123,75 +123,67 @@
 
             const fields = instance.hostedFields();
 
-            const cardNumberSettings = {
-                ...DEFAULT_SETTINGS,
+            const cardNumberSettings = Object.assign({}, DEFAULT_SETTINGS, {
                 placeholder: ' ',
                 messages: {
                     invalid: 'Bad credit card number',
                     required: 'Field "Card Number" is mandatory'
                 },
-            };
-            const firstNameField = {
-                ...DEFAULT_SETTINGS,
+            });
+            const firstNameField = Object.assign({}, DEFAULT_SETTINGS, {
                 placeholder: ' ',
                 messages: {
                     invalid: 'Letters only for field "First name"',
                     required: 'Field "First name" is mandatory'
                 },
-            };
+            });
 
-            const lastNamefield = {
-                ...DEFAULT_SETTINGS,
+            const lastNamefield = Object.assign({}, DEFAULT_SETTINGS, {
                 placeholder: ' ',
                 messages: {
                     invalid: 'Letters only for field "Last name"',
                     required: 'Field "Last name" is mandatory'
                 },
-            };
+            });
 
-            const emailField = {
-                ...DEFAULT_SETTINGS,
+            const emailField = Object.assign({}, DEFAULT_SETTINGS, {
                 placeholder: ' ',
                 messages: {
                     invalid: 'Invalid Email',
                     required: 'Field "Email" is mandatory'
                 },
-            };
+            });
 
-            const phoneField = {
-                ...DEFAULT_SETTINGS,
+            const phoneField = Object.assign({}, DEFAULT_SETTINGS, {
                 placeholder: ' ',
                 messages: {
                     invalid: 'Invalid Phone',
                     required: 'Field "Phone" is mandatory'
                 },
-            };
+            });
 
-            const socialIdField = {
-                ...DEFAULT_SETTINGS,
+            const socialIdField = Object.assign({}, DEFAULT_SETTINGS, {
                 placeholder: ' ',
                 messages: {
                     invalid: 'Invalid Phone',
                     required: 'Field "Social Id" is mandatory'
                 },
 
-            };
-            const cvcField = {
-                ...DEFAULT_SETTINGS,
+            });
+            const cvcField = Object.assign({}, DEFAULT_SETTINGS, {
                 placeholder: ' ',
                 messages: {
                     invalid: 'Invalid CVC',
                     required: 'Field "CVC" is mandatory'
                 },
-            };
-            const expirationField = {
-                ...DEFAULT_SETTINGS,
+            });
+            const expirationField = Object.assign({}, DEFAULT_SETTINGS, {
                 placeholder: ' ',
                 messages: {
                     invalid: 'Invalid Expiration',
                     required: 'Field "Expiration" is mandatory'
                 },
-            };
+            });
 
 
             const cardNumber = fields.create(PayMe.fields.NUMBER, cardNumberSettings);

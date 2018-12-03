@@ -2,12 +2,12 @@
     background-image: linear-gradient(210deg, rgba(17,132,189,1) -10px, rgba(234,244,251,1) 50%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 120px);
     height: 1450px;
     display: flex;
-    align-items: end;
     padding-top: 50px;
     justify-content: center;
 }
 .title{
     max-width: 750px;
+    max-height: 450px;
     text-align: center;
     border-radius: 3px;
     padding: 75px;
@@ -16,7 +16,7 @@
     margin-top: 0;
     margin-bottom: 1rem;
     font-size: 20px;
-    color: #000000;
+    color: #373D3D;
 }
 .title img {
     margin-bottom: 30px;
@@ -44,6 +44,8 @@
     color: #fff;
     transform: scale(1);
     transition: all .2s;
+    height: 127px;
+    width: 68px;
 }
 .our-source a:hover{
     transform: scale(1.1);
