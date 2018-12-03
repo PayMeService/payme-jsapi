@@ -4,5 +4,5 @@
 /**/Thumbs.db
 /.idea/
 /*.md/
-/app/libs
+/app/**/*
 
