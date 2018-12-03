@@ -1,0 +1,199 @@
+.second-example{
+    margin-top: 80px;
+
+}
+.second-example .wrap-block {
+    background: #555A7F;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 580px;
+}
+
+.second-example .wrap-block form {
+    max-width: 475px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.second-example .form-control, .first-example .input-group-text {
+    background-color: transparent;
+    border: none;
+}
+
+.second-example button {
+    background: #FCDD60;
+    border: none;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    color: #555A7D;
+    font-weight: 500;
+    text-transform: uppercase;
+    height: 40px;
+    line-height: 1;
+}
+
+.second-example button:hover {
+    -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.second-example .row-wrap-for-all-input {
+    padding-bottom: 10px;
+}
+
+.second-example .row-wrap-for-all-input .form-control {
+    height: -webkit-calc(2.25rem + 5px);
+    height: calc(2.25rem + 5px);
+    padding: .375rem 1.2rem;
+}
+
+.second-example .one-block-for-all-divided-input {
+    background: #7F7FF6;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+.second-example .wrap-for-input .form-control {
+    background: #7482AA;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    font-weight: 600;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+.second-example .wrap-for-input {
+    font-size: 20px;
+    margin-bottom: 7px;
+}
+
+.second-example .wrap-for-input:last-child {
+    border-bottom: none;
+}
+
+.second-example .wrap-for-input label {
+    color: #BBE9FD;
+    padding-left: 0;
+    background: transparent;
+    border: none;
+}
+
+.second-example .block-for-validate-errors {
+    width: 100%;
+    min-height: 45px;
+    padding-top: 20px;
+}
+
+.second-example .block-for-validate-errors p {
+    text-align: center;
+    color: #ffffff;
+}
+
+.second-example .line-for-several-input {
+    margin-bottom: 20px;
+}
+
+.second-example .line-for-several-input .wrap-for-input {
+    width: 49.5%;
+    margin-right: 1%;
+}
+
+.second-example .line-for-several-input .wrap-for-input:last-child {
+    margin-right: 0;
+}
+
+.second-example .wrap-block-with-input {
+    width: 32.5%;
+    margin-right: 1%;
+}
+
+.second-example .wrap-block-with-input .form-control {
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
+    background: #7482aa;
+}
+
+.second-example .block-for-social-id {
+    margin-right: 0;
+}
+
+.second-example .wrap-for-input .focus-on-field, .second-example .wrap-block-with-input .focus-on-field {
+    background: #fff;
+    color: #565B7D;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+.second-example .has-error .form-control {
+    background: #F8735E;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+
+.second-example .success{
+    max-width: 450px;
+    margin: 0 auto;
+    background: #7482A7;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    color: #ffffff;
+    margin-top: 100px;
+    position: relative;
+}
+
+.second-example .success span{
+    min-width: 80px;
+}
+
+.second-example .success .query-info{
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+}
+
+.second-example .success .back-on-form2{
+    font-size: 25px;
+    text-align: center;
+    cursor: pointer;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.second-example .wrap-loading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0, 0.4);
+}
+
+.second-example .loading {
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+    width: 50px;
+    height: 50px;
+    border: .5rem solid rgba(0,0,0, 0.6);
+    border-top-color: rgb(255,255,255);
+    animation: spin 1s infinite linear;
+}

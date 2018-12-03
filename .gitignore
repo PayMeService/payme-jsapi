@@ -1,0 +1,13 @@
+/node_modules/
+/.git/
+/**/*.psd
+/**/Thumbs.db
+/.idea/
+/*.md/
+/app/**/*
+.bowerrc
+bower.json
+gulpfile.js
+package*.json
+.htaccess
+
