@@ -1,17 +1,19 @@
 .fourth-example{
     margin-top: 80px;
-    margin-bottom: 80px;
+    /*margin-bottom: 80px;*/
 }
 .fourth-example .wrap-block {
-    background: #E5E6F9;
+    background: #ffffff;
     -webkit-border-radius: 5px;
     border-radius: 5px;
     -webkit-box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
-    padding: 80px 140px;
-    text-align: center;
     max-width: 750px;
     margin: 0 auto;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .fourth-example .modal-dialog {
