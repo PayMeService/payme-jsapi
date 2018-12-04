@@ -86,3 +86,8 @@
         height: 1680px;
     }
 }
+@media only screen and (max-width : 350px) {
+    .title {
+        padding: 75px 20px;
+    }
+}
