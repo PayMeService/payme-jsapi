@@ -8,25 +8,25 @@
 Basic example based on Bootstrap 3
 
 ### Example 1
--   [JavaScript](js/example1.js)
+-   [JavaScript](js/exemple1.js)
 -   [CSS](css/example1.css)
 
 TODO - write description
 
 ### Example 2
--   [JavaScript](js/example2.js)
+-   [JavaScript](js/exemple2.js)
 -   [CSS](css/example2.css)
 
 TODO - write description
 
 ### Example 3
--   [JavaScript](js/example3.js)
+-   [JavaScript](js/exemple3.js)
 -   [CSS](css/example3.css)
 
 TODO - write description
 
 ### Example 4
--   [JavaScript](js/example4.js)
+-   [JavaScript](js/exemple4.js)
 -   [CSS](css/example4.css)
 
 TODO - write description
