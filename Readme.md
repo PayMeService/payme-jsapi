@@ -1,11 +1,38 @@
 # Client Integration Manual
 
-**Examples can be found here:**
- 
--   [jsFiddle](https://jsfiddle.net/IlyaYakushev/50t31vxw/) 
--   [examples page](https://payme-client-api-examples.herokuapp.com/examples)
+## Examples
 
-**Step-by-step integration** 
+### Basic
+-   [jsFiddle](https://jsfiddle.net/IlyaYakushev/50t31vxw/)
+
+Basic example based on Bootstrap 3
+
+### Example 1
+-   [JavaScript](js/example1.js)
+-   [CSS](css/example1.css)
+
+TODO - write description
+
+### Example 2
+-   [JavaScript](js/example2.js)
+-   [CSS](css/example2.css)
+
+TODO - write description
+
+### Example 3
+-   [JavaScript](js/example3.js)
+-   [CSS](css/example3.css)
+
+TODO - write description
+
+### Example 4
+-   [JavaScript](js/example4.js)
+-   [CSS](css/example4.css)
+
+TODO - write description
+
+
+## Step-by-step integration
 
 1.  Include Client API Library into `<head>` section of your page
 2.  Put markup, designed by your own or corporate site template
@@ -19,7 +46,7 @@
       ...
     
       <!-- Include Client API Library in your page -->
-      <script src="https://cdn.paymeservice.com/hf/v1/index-latest.js"></script>
+      <script src="https://cdn.paymeservice.com/hf/v1/hostedfields.js"></script>
       ...
     </head>
     <body>...</body>
