@@ -193,3 +193,11 @@
     border-top-color: rgb(255,255,255);
     animation: spin 1s infinite linear;
 }
+
+@media only screen and (max-width : 350px) {
+    .fourth-example .modal-body {
+         padding: 10px;
+    }
+
+}
+
