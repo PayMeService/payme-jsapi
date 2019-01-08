@@ -196,6 +196,13 @@ PayMe.create(key, { testMode: true })
 ...
 ```
 
+> **Note**
+>
+> You can setup `Test mode` and `lang` using options argument of **PayMe.create(key, options)** method
+>
+> { testMode: false, lang: 'en' } - is default options. `testMode` can be `true` or `false` and `lang` can be one of `en, he` string  
+
+
 Next step - to initialize integration type and get corresponding manager
 
 > **Note**
