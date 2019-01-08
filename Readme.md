@@ -198,9 +198,9 @@ PayMe.create(key, { testMode: true })
 
 > **Note**
 >
-> You can setup `Test mode` and `Language` parameter for PayMe API calls, using options argument of **PayMe.create(key, options)** method
+> You can setup `Test mode` and `Language` parameters for the calls, using options argument of **PayMe.create(key, options)** method
 >
-> { testMode: false, language: 'en' } - is default options. `testMode` can be `true` or `false` and `language` can be one of `en, he` string  
+> { testMode: false, language: 'en' } - are the default options. `testMode` can be `true` or `false` and `language` can be either `en` (for English) or `he` (for Hebrew) string.
 
 
 Next step - to initialize integration type and get corresponding manager
