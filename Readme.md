@@ -1,6 +1,7 @@
 # Client Integration Manual
 
 ## Examples
+[Check examples page](https://paymeservice.github.io/payme-jsapi/)
 
 ### Basic
 -   [jsFiddle](https://jsfiddle.net/IlyaYakushev/50t31vxw/)
@@ -487,6 +488,36 @@ PayMe.create(key, { testMode: true })
   ...
 ...
 ```
+
+If you want let your users input additional data (First name, Last name, Email, Phone number, Social ID) rather provide 
+by yourself you easily use native HTML inputs within your page (please check our examples page). This approach let you 
+to use any presenting, styling, formatting logic. To help you with validation we were exposing validators to you
+
+#### Additional fields validators
+
+Particular validator can be obtained and used by this code
+
+```
+// ...
+
+var firstNameValidator = PayMe.validators[PayMe.fields.NAME_FIRST];
+var validation = firstNameValidator.test('John');
+
+// ...
+
+console.log(validation);
+```
+
+#### Additional fields validation result
+
+If validation result is success then `validation` would be `null` in the other case:
+- `{required: true}` - if `firstNameValidator.test(...)` argument not defined
+- `{invalid: true}` - if `firstNameValidator.test(...)` argument has unallowable value
+
+> **Note**
+>
+> Values within additional fields must pass exposed validators. Without fulfilling this condition tokenization will fail!
+>
 
 #### tokenizationResult structure (successful tokenization)
 
