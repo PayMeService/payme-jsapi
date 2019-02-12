@@ -1,27 +1,27 @@
 /**
  * Created by thoryachev on 22.11.2018.
  */
-// HELPERS ---------------------------------------------------------------------------------
-(function () {
-  const mpl = 'MPL15282-97137EVV-KOAOAOIT-VWCZPB8V';
+(function (document, mpl) {
+
+  // Cache DOM Nodes ---------------------------------------------------------------------------------------------------
 
   const form = document.getElementById('checkout-form');
-  const cardProvider = document.getElementById('card-provider');
-  const errorsMessages = document.getElementById('errors');
-  const numberGroup = document.getElementById('card-number-group');
-  const expirationGroup = document.getElementById('card-expiration-group');
-  const cvcGroup = document.getElementById('card-cvv-group');
-  const firstNameGroup = document.getElementById('first-name-group');
-  const lastNameGroup = document.getElementById('last-name-group');
-  const emailGroup = document.getElementById('email-group');
-  const phoneGroup = document.getElementById('phone-group');
-  const socialIdGroup = document.getElementById('social-id-group');
-  const successQuery = document.querySelector('.first-example .success');
-  const backFormButton = document.querySelector('.back-on-form1')
-// -----------------------------------------------------------------------------------------------------------------
-
   const submitButton = document.getElementById('submit-button');
-  submitButton.disabled = true;
+  const cardProvider = document.getElementById('card-provider');
+  const errorsMessagesContainer = document.getElementById('errors');
+
+  const successQuery = document.querySelector('.first-example .success');
+  const backFormButton = document.querySelector('.back-on-form1');
+
+  const firstNameInput = document.getElementById('first-name-input');
+  const lastNameInput = document.getElementById('last-name-input');
+  const emailInput = document.getElementById('email-input');
+  const phoneInput = document.getElementById('phone-input');
+  const socialIdInput = document.getElementById('social-id-input');
+
+  // Helpers -----------------------------------------------------------------------------------------------------------
+
+  const errorsFromField = {};
 
   function tokenizationStarted() {
     form.classList.add('fadeOut');
@@ -33,43 +33,64 @@
     console.log('Tokenization started!');
   }
 
-  function tokenizationFinished() {
+  function tokenizationFinished(error) {
     successQuery.querySelector('.wrap-loading').style.display = 'none';
     submitButton.disabled = false;
     console.log('Tokenization finished!');
-  }
 
-  const errorsFromField = {};
+    if(error) {
+      console.error(error);
 
-  function showErrors(errorsFromField, el, ev) {
-    let lastElement = errorsFromField[Object.keys(errorsFromField).pop()];
-    el.classList.remove('fadeOutDown');
-    if (!ev.message) {
-      el.innerText = lastElement;
+      const failedValidation = {
+        field: PayMe.fields.NONE, isValid: false, message: ''
+      };
+
+      // Checking is tokenization processing error
+      if(error.type && error.type === 'tokenize-error') {
+        // Handle tokenization processing error
+        const [ firstErrorMessage ] = Object.values(error.errors);
+        failedValidation.message = firstErrorMessage;
+      } else {
+        // Handle other errors from PayMe
+        failedValidation.message = error.message;
+      }
+
+      toggleValidationMessages(failedValidation);
     } else {
-      el.innerText = ev.message;
+      firstNameInput.value = lastNameInput.value = emailInput.value = phoneInput.value = socialIdInput.value = '';
     }
   }
 
-  function toggleValidationMessages(wrapper, ev) {
-    if (ev.isValid) {
-      wrapper.classList.remove('has-error');
-      this.classList.remove('fadeInUp');
-      this.classList.add('fadeOutDown');
-      delete errorsFromField[ev.field]; // delete error from the object that passed validation
+  function showErrors(errorsFromField, validationResult) {
+    let lastElement = errorsFromField[Object.keys(errorsFromField).pop()];
+    errorsMessagesContainer.classList.remove('fadeOutDown');
+    if (!validationResult.message) {
+      errorsMessagesContainer.innerText = lastElement;
+    } else {
+      errorsMessagesContainer.innerText = validationResult.message;
+    }
+  }
+
+  function toggleValidationMessages(validationResult) {
+
+    delete errorsFromField[PayMe.fields.NONE];
+
+    if (validationResult.isValid) {
+      errorsMessagesContainer.classList.remove('fadeInUp');
+      errorsMessagesContainer.classList.add('fadeOutDown');
+      delete errorsFromField[validationResult.field]; // delete error from the object that passed validation
 
       if (Object.keys(errorsFromField).length > 0) { // if the object still has errors - output them
-        showErrors(errorsFromField, this, ev);
-        this.classList.remove('fadeOutDown');
-        this.classList.add('fadeInUp');
+        showErrors(errorsFromField, validationResult);
+        errorsMessagesContainer.classList.remove('fadeOutDown');
+        errorsMessagesContainer.classList.add('fadeInUp');
       }
     } else {
-      errorsFromField[ev.field] = ev.message; // write errors to the object
-      wrapper.classList.add('has-error');
-      this.classList.remove('fadeOutDown');
-      this.classList.add('fadeInUp');
+      errorsFromField[validationResult.field] = validationResult.message; // write errors to the object
+      errorsMessagesContainer.classList.remove('fadeOutDown');
+      errorsMessagesContainer.classList.add('fadeInUp');
       if (Object.keys(errorsFromField).length > 0) { // check if there is an error in the object
-        showErrors(errorsFromField, this, ev); // and show its
+        showErrors(errorsFromField, validationResult); // and show its
       }
     }
   }
@@ -112,7 +133,38 @@
     successQuery.querySelector('.token').innerHTML = "<span>Token:</span> " + data.token;
   }
 
-// -----------------------------------------------------------------------------------------------------------------
+  function runNativeFieldValidator(value, field, messages){
+    const validator = PayMe.validators[field];
+    const errors = validator.test(value);
+    let message;
+    if(errors && errors.required) {
+      message = messages.required
+    }
+    if(errors && errors.invalid) {
+      message = messages.invalid
+    }
+
+    return { isValid: !errors, field: field, message: message };
+  }
+
+  function createNativeFieldValidatorHandler(fieldName, messagesObject) {
+    return function(ev) {
+      const inputNode = this;
+      const validation = runNativeFieldValidator(ev.target.value, fieldName, messagesObject);
+
+      if (validation.isValid) {
+        inputNode.classList.remove('invalid');
+        inputNode.classList.add('valid');
+      } else {
+        inputNode.classList.remove('valid');
+        inputNode.classList.add('invalid');
+      }
+
+      toggleValidationMessages(validation);
+    }
+  }
+
+  // Misc --------------------------------------------------------------------------------------------------------------
 
   const allFieldsReady = [];
 
@@ -131,13 +183,20 @@
     }
   };
 
+  // Main --------------------------------------------------------------------------------------------------------------
   function init() {
-    PayMe.create(mpl, {
-      testMode: true
-    }).then((instance) => {
+
+    // Disable submit button until protected fields initialization
+    submitButton.disabled = true;
+
+    // Getting hosted fields integration manager
+    PayMe.create(mpl, { testMode: true }).then((instance) => {
 
       const fields = instance.hostedFields();
 
+      // Protected fields ------------------------------------------------------
+
+      // Card Number
       const cardNumberSettings =  Object.assign({}, DEFAULT_SETTINGS, {
         placeholder: 'Credit Card Number',
         messages: {
@@ -145,63 +204,12 @@
           required: 'Field "Card Number" is mandatory'
         },
       });
-
-      const firstNameField =  Object.assign({}, DEFAULT_SETTINGS, {
-        placeholder: 'First name',
-        messages: {
-          invalid: 'Letters only for field "First name"',
-          required: 'Field "First name" is mandatory'
-        },
-      });
-
-      const lastNameField =  Object.assign({}, DEFAULT_SETTINGS, {
-        placeholder: 'Last name',
-        messages: {
-          invalid: 'Letters only for field "Last name"',
-          required: 'Field "Last name" is mandatory'
-        },
-      });
-
-      const emailField = Object.assign({}, DEFAULT_SETTINGS, {
-        messages: {
-          invalid: 'Invalid Email',
-          required: 'Field "Email" is mandatory'
-        },
-      });
-
-      const phoneField = Object.assign({}, DEFAULT_SETTINGS, {
-        messages: {
-          invalid: 'Invalid Phone',
-          required: 'Field "Phone" is mandatory'
-        },
-      });
-
-      const socialIdField = Object.assign({}, DEFAULT_SETTINGS, {
-        messages: {
-          invalid: 'Invalid Phone',
-          required: 'Field "Social Id" is mandatory'
-        },
-      });
-      const cvcField = Object.assign({}, DEFAULT_SETTINGS, {
-        placeholder: 'CVV',
-        messages: {
-          invalid: 'Invalid CVV',
-          required: 'Field "CVV" is mandatory'
-        },
-      });
-      const expirationField = Object.assign({}, DEFAULT_SETTINGS, {
-        messages: {
-          invalid: 'Invalid Expiration',
-          required: 'Field "Expiration" is mandatory'
-        },
-      });
-
       const cardNumber = fields.create(PayMe.fields.NUMBER, cardNumberSettings);
       allFieldsReady.push(
         cardNumber.mount('#card-number-container')
       );
       cardNumber.on('card-type-changed', ev => changeCardProviderIcon(ev.cardType));
-      cardNumber.on('keyup', toggleValidationMessages.bind(errorsMessages, numberGroup));
+      cardNumber.on('keyup', toggleValidationMessages);
       cardNumber.on('keyup', (e) => {
         if (e.isValid) {
           expiration.focus();
@@ -210,79 +218,113 @@
         e.isEmpty ? removeClass('card-cvv-group', 'animate-card-option') : addClass('card-cvv-group', 'animate-card-option');
       });
 
-
+      // Expiry Date
+      const expirationField = Object.assign({}, DEFAULT_SETTINGS, {
+        messages: {
+          invalid: 'Invalid Expiration',
+          required: 'Field "Expiration" is mandatory'
+        },
+      });
       const expiration = fields.create(PayMe.fields.EXPIRATION, expirationField);
       allFieldsReady.push(
         expiration.mount('#card-expiration-container')
       );
-      expiration.on('keyup', toggleValidationMessages.bind(errorsMessages, expirationGroup));
-      expiration.on('validity-changed', toggleValidationMessages.bind(errorsMessages, expirationGroup));
+      expiration.on('keyup', toggleValidationMessages);
+      expiration.on('validity-changed', toggleValidationMessages);
       expiration.on('keyup', (e) => {
         if (e.isValid) {
           cvc.focus();
         }
       });
 
-
+      // CVC/CVV
+      const cvcField = Object.assign({}, DEFAULT_SETTINGS, {
+        placeholder: 'CVV',
+        messages: {
+          invalid: 'Invalid CVV',
+          required: 'Field "CVV" is mandatory'
+        },
+      });
       const cvc = fields.create(PayMe.fields.CVC, cvcField);
       allFieldsReady.push(
         cvc.mount('#card-cvv-container')
       );
-      cvc.on('keyup', toggleValidationMessages.bind(errorsMessages, cvcGroup));
-      cvc.on('validity-changed', toggleValidationMessages.bind(errorsMessages, cvcGroup));
+      cvc.on('keyup', toggleValidationMessages);
+      cvc.on('validity-changed', toggleValidationMessages);
 
+      // AUX fields ------------------------------------------------------------
 
-      const phone = fields.create(PayMe.fields.PHONE, phoneField);
-      allFieldsReady.push(
-        phone.mount('#phone-container')
+      // First Name
+      const firstNameMessages = {
+        invalid: 'Letters only for field "First name"', required: 'Field "First name" is mandatory'
+      };
+      firstNameInput.addEventListener(
+        'keyup', createNativeFieldValidatorHandler(PayMe.fields.NAME_FIRST, firstNameMessages)
       );
-      phone.on('keyup', toggleValidationMessages.bind(errorsMessages, phoneGroup));
-      phone.on('validity-changed', toggleValidationMessages.bind(errorsMessages, phoneGroup));
-
-
-      const email = fields.create(PayMe.fields.EMAIL, emailField);
-      allFieldsReady.push(
-        email.mount('#email-container')
+      firstNameInput.addEventListener(
+        'focus', createNativeFieldValidatorHandler(PayMe.fields.NAME_FIRST, firstNameMessages)
       );
-      email.on('keyup', toggleValidationMessages.bind(errorsMessages, emailGroup));
-      email.on('validity-changed', toggleValidationMessages.bind(errorsMessages, emailGroup));
 
-
-      const firstName = fields.create(PayMe.fields.NAME_FIRST, firstNameField);
-      allFieldsReady.push(
-        firstName.mount('#first-name-container')
+      // Last Name
+      const lastNameMessages = {
+        invalid: 'Letters only for field "Last name"', required: 'Field "Last name" is mandatory'
+      };
+      lastNameInput.addEventListener(
+        'keyup', createNativeFieldValidatorHandler(PayMe.fields.NAME_LAST, lastNameMessages)
       );
-      firstName.on('keyup', toggleValidationMessages.bind(errorsMessages, firstNameGroup));
-      firstName.on('validity-changed', toggleValidationMessages.bind(errorsMessages, firstNameGroup));
-
-
-      const lastName = fields.create(PayMe.fields.NAME_LAST, lastNameField);
-      allFieldsReady.push(
-        lastName.mount('#last-name-container')
+      lastNameInput.addEventListener(
+        'focus', createNativeFieldValidatorHandler(PayMe.fields.NAME_LAST, lastNameMessages)
       );
-      lastName.on('keyup', toggleValidationMessages.bind(errorsMessages, lastNameGroup));
-      lastName.on('validity-changed', toggleValidationMessages.bind(errorsMessages, lastNameGroup));
 
-
-      const socialId = fields.create(PayMe.fields.SOCIAL_ID, socialIdField);
-      allFieldsReady.push(
-        socialId.mount('#social-id-container')
+      // Email
+      const emailMessages = {
+        invalid: 'Invalid Email', required: 'Field "Email" is mandatory'
+      };
+      emailInput.addEventListener(
+        'keyup', createNativeFieldValidatorHandler(PayMe.fields.EMAIL, emailMessages)
       );
-      socialId.on('keyup', toggleValidationMessages.bind(errorsMessages, socialIdGroup));
-      socialId.on('validity-changed', toggleValidationMessages.bind(errorsMessages, socialIdGroup));
+      emailInput.addEventListener(
+        'focus', createNativeFieldValidatorHandler(PayMe.fields.EMAIL, emailMessages)
+      );
+
+      // Phone Number
+      const phoneMessages = {
+          invalid: 'Invalid Phone', required: 'Field "Phone" is mandatory'
+      };
+      phoneInput.addEventListener(
+        'keyup', createNativeFieldValidatorHandler(PayMe.fields.PHONE, phoneMessages)
+      );
+      phoneInput.addEventListener(
+        'focus', createNativeFieldValidatorHandler(PayMe.fields.PHONE, phoneMessages)
+      );
+
+      // Social Id
+      const socialIdMessages = {
+        invalid: 'Invalid Social Id', required: 'Field "Social Id" is mandatory'
+      };
+      socialIdInput.addEventListener(
+        'keyup',  createNativeFieldValidatorHandler(PayMe.fields.SOCIAL_ID, socialIdMessages)
+      );
+      socialIdInput.addEventListener(
+        'focus',  createNativeFieldValidatorHandler(PayMe.fields.SOCIAL_ID, socialIdMessages)
+      );
+
+      // Wait for fields initialization ----------------------------------------
 
       Promise.all(allFieldsReady).then(() => submitButton.disabled = false);
+
+      // Form submission handler -----------------------------------------------
 
       const formSubmit = ev => {
         ev.preventDefault();
 
         const sale = {
-          // payerFirstName: 'Vladimir',
-          // payerLastName: 'kondratiev',
-          // payerEmail: 'trahomoto@mailforspam.com',
-          // payerPhone: '1231231',
 
-          payerSocialId: '65656',
+          payerFirstName: firstNameInput.value,
+          payerLastName: lastNameInput.value,
+          payerEmail: emailInput.value,
+          payerPhone: phoneInput.value,
+          payerSocialId: socialIdInput.value,
 
           total: {
             label: '🚀 Rubber duck',
@@ -294,24 +336,25 @@
         };
 
         tokenizationStarted();
+        toggleValidationMessages({ field: PayMe.fields.NONE, isValid: true});
 
         instance.tokenize(sale)
           .then(data => {
             console.log('Tokenization result::: ', data);
-
             showSuccessQuery(data);
-
             tokenizationFinished();
           })
           .catch(err => {
-            console.error(err);
             alert('Tokenization failed');
+
             successQuery.style.display = 'none';
             form.style.display = 'block';
             form.classList.remove('fadeOut');
-            tokenizationFinished();
+            tokenizationFinished(err);
           });
       };
+
+      // Return and recreate handler -------------------------------------------
 
       const clickToBackOnForm = () => {
         successQuery.style.display = 'none';
@@ -327,6 +370,8 @@
         init();
       };
 
+      // Events binding --------------------------------------------------------
+
       form.addEventListener('submit', formSubmit);
       backFormButton.addEventListener('click', clickToBackOnForm);
 
@@ -335,6 +380,4 @@
 
   init();
 
-})();
-
-
+})(document, 'MPL15282-97137EVV-KOAOAOIT-VWCZPB8V');
