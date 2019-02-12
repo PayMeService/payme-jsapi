@@ -1,7 +1,34 @@
+.fourth-example input {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: none;
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, serif;
+  font-size: 16px;
+  color: #000;
+}
+
+.fourth-example input:focus {
+  outline: 0;
+}
+
+.fourth-example input.invalid {
+  color: #FF0000;
+}
+
+.fourth-example ::placeholder {
+  color: #D3DAE2;
+}
+
 .fourth-example{
     margin-top: 80px;
-    /*margin-bottom: 80px;*/
 }
+
 .fourth-example .wrap-block {
     background: #ffffff;
     -webkit-border-radius: 5px;

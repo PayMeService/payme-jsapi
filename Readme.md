@@ -9,7 +9,7 @@
 Basic example based on Bootstrap 3
 
 ### Example 1
--   [JavaScript](js/example.js)
+-   [JavaScript](js/example1.js)
 -   [CSS](css/example1.css)
 
 TODO - write description
@@ -490,7 +490,7 @@ PayMe.create(key, { testMode: true })
 ```
 
 If you want let your users input additional data (First name, Last name, Email, Phone number, Social ID) rather provide 
-by yourself you easily use native HTML inputs within your page (please check our examples page). This approach let you 
+by yourself you can use native HTML inputs within your page (please check our examples page). This approach let you 
 to use any presenting, styling, formatting logic. To help you with validation we were exposing validators to you
 
 #### Additional fields validators
@@ -700,3 +700,13 @@ On the backend side you can build sale payload
 `buyer_key`                                | tokenizationData.token
 
 and send it to the `https://****.paymeservice.com/api/generate-sale`
+
+# Security notes:
+
+Our service has a strict Content Security Policy (CSP) which in some cases might cause error messages to appear in the browser console. These errors do not cause any kind of malfunction or security risk to our service, and you can safely ignore them.
+
+- In most cases the errors are caused by third party extensions installed on the browser. Try turning off the extensions or browse in private mode.
+- The error messages might also be caused by potentially malicious JavaScripts or browser extensions which inject JavaScript to the content pages. Our service is protected against such threats.
+
+Example of such errors can be seen in the picture below:
+![](img/console-errors.png)
