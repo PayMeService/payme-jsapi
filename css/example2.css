@@ -1,7 +1,38 @@
+.second-example input {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: none;
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    font-family: Arial, serif;
+    font-size: 16px;
+    color: #565B7D;
+}
+
+.second-example input:focus {
+    outline: 0;
+}
+
+.second-example input.invalid {
+    color: #FFF;
+}
+
+.second-example input.valid {
+    color: #565B7D
+}
+
+.second-example ::placeholder {
+    color: #8FA7C8;
+}
+
 .second-example{
     margin-top: 80px;
-
 }
+
 .second-example .wrap-block {
     background: #555A7F;
     -webkit-border-radius: 5px;
