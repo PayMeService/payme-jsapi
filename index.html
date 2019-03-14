@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="./css/page.css">
 
     <link rel="stylesheet" href="./css/example1.css">
+    <link rel="stylesheet" href="./css/example1-he.css">
     <link rel="stylesheet" href="./css/example2.css">
     <link rel="stylesheet" href="./css/example3.css">
     <link rel="stylesheet" href="./css/example4.css">
@@ -41,6 +42,7 @@
 </div>
 <div class="background-bottom"></div>
 <div class="our-forms">
+
     <div class="first-example">
         <div class="justify-content-md-center">
             <div class="wrap-block">
@@ -158,6 +160,125 @@
         <span>Your card won't be charged</span>
         <a href="https://github.com/PayMeService/JS-API/#example-1"><i class="fas fa-align-left"></i>View source on GitHub
         </a>
+    </div>
+
+    <div class="first-example-he" dir="rtl">
+        <div class="justify-content-md-center">
+            <div class="wrap-block">
+                <!-- CREDIT CARD FORM STARTS HERE -->
+                <form role="form" id="checkout-form-he" class="animated">
+
+                    <div class="row-wrap-for-all-input">
+                        <div class="one-block-for-all-divided-input">
+
+                            <div class="wrap-for-input">
+                                <div class="input-group" id="first-name-group-he">
+                                    <div class="input-group-prepend">
+                                        <label for="first-name-input" class="input-group-text">שם פרטי</label>
+                                    </div>
+                                    <div id="first-name-container-he" class="form-control">
+                                        <input id="first-name-input-he" type="text" placeholder="שם פרטי">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="wrap-for-input">
+                                <div class="input-group" id="last-name-group-he">
+                                    <div class="input-group-prepend">
+                                        <label for="last-name-input" class="input-group-text">שם משפחה</label>
+                                    </div>
+                                    <div id="last-name-container-he" class="form-control">
+                                        <input id="last-name-input-he" type="text" placeholder="שם משפחה">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="wrap-for-input">
+                                <div class="input-group" id="email-group-he">
+                                    <div class="input-group-prepend">
+                                        <label for="email-input" class="input-group-text">דואר אלקטרוני</label>
+                                    </div>
+                                    <div id="email-container-he" class="form-control">
+                                        <input id="email-input-he" type="text" placeholder="דואר אלקטרוני">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="wrap-for-input">
+                                <div class="input-group" id="phone-group-he">
+                                    <div class="input-group-prepend">
+                                        <label for="phone-input" class="input-group-text">טלפון נייד</label>
+                                    </div>
+                                    <div id="phone-container-he" class="form-control">
+                                        <input id="phone-input-he" type="text" placeholder="טלפון נייד">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="wrap-for-input">
+                                <div class="input-group" id="social-id-group-he">
+                                    <div class="input-group-prepend">
+                                        <label for="social-id-input" class="input-group-text">תעודת זהות</label>
+                                    </div>
+                                    <div id="social-id-container-he" class="form-control">
+                                        <input id="social-id-input-he" type="text" placeholder="תעודת זהות">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group line-for-several-input">
+                            <div class="input-group-prepend icon-for-card">
+                                <div class="input-group-text">
+                                    <span class="input-group-addon">
+                                        <i class="fas fa-credit-card" id="card-provider-he"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="card-number-group-he" class="block-for-card-number">
+                                <div id="card-number-container-he" class="form-control"></div>
+                            </div>
+                            <div id="card-expiration-group-he" class="block-for-expiration-card">
+                                <div id="card-expiration-container-he" class="form-control"></div>
+                            </div>
+                            <div id="card-cvv-group-he" class="block-for-cvv-card">
+                                <div id="card-cvv-container-he" class="form-control"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="subscribe btn btn-lg btn-block" id="submit-button-he" disabled>
+                        לתשלום ₪55
+                    </button>
+
+                    <div class="block-for-validate-errors">
+                        <p id="errors-he" class="help-block animated"></p>
+                    </div>
+                    <div class="block-for-payment-errors">
+                        <p class="payment-errors-he"></p>
+                    </div>
+
+                </form>
+                <!-- CREDIT CARD FORM ENDS HERE -->
+                <div class="success animated" style="display: none">
+                    <div class="wrap-loading">
+                        <div class="loading"></div>
+                    </div>
+                    <div class="body">
+                        <div class="name query-info"></div>
+                        <div class="email query-info"></div>
+                        <div class="phone query-info"></div>
+                        <div class="socialId query-info"></div>
+                        <div class="token query-info"></div>
+                    </div>
+                    <div class="back-on-form1-he"><i class="fas fa-arrow-alt-circle-left"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-info">
+        <span>Your card won't be charged</span>
+        <a href="https://github.com/PayMeService/JS-API/#example-1-he"><i class="fas fa-align-left"></i>View source on GitHub</a>
     </div>
 
 
@@ -542,6 +663,7 @@
         crossorigin="anonymous"></script>
 
 <script src="js/example1.js"></script>
+<script src="js/example1-he.js"></script>
 <script src="js/example2.js"></script>
 <script src="js/example3.js"></script>
 <script src="js/example4.js"></script>

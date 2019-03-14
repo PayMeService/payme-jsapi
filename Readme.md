@@ -14,6 +14,12 @@ Basic example based on Bootstrap 3
 
 TODO - write description
 
+### Example 1 RTL
+-   [JavaScript](js/example1-he.js)
+-   [CSS](css/example1-he.css)
+
+The same UI/UX example like *Example 1* but shows how to tackle RTL languages 
+
 ### Example 2
 -   [JavaScript](js/example2.js)
 -   [CSS](css/example2.css)
