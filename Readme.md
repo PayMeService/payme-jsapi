@@ -12,8 +12,6 @@ Basic example based on Bootstrap 3
 -   [JavaScript](js/example1.js)
 -   [CSS](css/example1.css)
 
-TODO - write description
-
 ### Example 1 RTL
 -   [JavaScript](js/example1-he.js)
 -   [CSS](css/example1-he.css)
@@ -24,19 +22,13 @@ The same UI/UX example like *Example 1* but shows how to tackle RTL languages
 -   [JavaScript](js/example2.js)
 -   [CSS](css/example2.css)
 
-TODO - write description
-
 ### Example 3
 -   [JavaScript](js/example3.js)
 -   [CSS](css/example3.css)
 
-TODO - write description
-
 ### Example 4
 -   [JavaScript](js/example4.js)
 -   [CSS](css/example4.css)
-
-TODO - write description
 
 
 ## Step-by-step integration
