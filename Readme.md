@@ -195,11 +195,13 @@ PayMe.create(key, { testMode: true })
 ...
 ```
 
-> **Note**
->
-> You can setup `Test mode` and `Language` parameters for the calls, using options argument of **PayMe.create(key, options)** method
->
-> { testMode: false, language: 'en' } - are the default options. `testMode` can be `true` or `false` and `language` can be either `en` (for English) or `he` (for Hebrew) string.
+#### Initialization settings
+
+Property          |   Default value  |   Available values  | Description
+----------------- | :--------------: | :-----------------: | -------------
+`testMode`        | false            | true / false        | `Test mode` - used to control in which environment payment will be processed
+`language`        | 'en'             | 'en' / 'he'         | `Language` - controls the language of the messages and text direction (rtl or ltr). `en` (for English) or `he` (for Hebrew)
+`tokenIsPermanent`| true             | true / false        | `Token is permanent` - Indicates whether it is a one-time-use or multi-use token
 
 
 Next step - to initialize integration type and get corresponding manager
