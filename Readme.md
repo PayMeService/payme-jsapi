@@ -313,6 +313,107 @@ cardNumber.mount('#card-number-container').then(function() {
 ...
 ```
 
+
+#### Field Creation Options
+`.create(field, options)` method accepts an optional second argument `options` which is helpful in case you want customize the field created with it.
+```
+var cardNumberFieldOptions = {
+    placeholder: 'Enter your Credit Card Number',
+    messages: {
+        required: 'The Credit Card Number is Required!',
+        invalid: 'Bad Credit Card Number'
+    },
+    styles: ... // see below
+};
+var cardNumber = fields.create('cardNumber', cardNumberFieldOptions);
+```
+
+The properties available for customization:
+
+Property        | Description
+----------------| -------------
+`placeholder`   | Placeholder text for empty field
+`messages`      | Validation messages object, can have properties `required` and `invalid` (see [Field Event Object](#field-event-object) and [Examples page](https://paymeservice.github.io/payme-jsapi/))
+`styles`        | CSS properties for "protected" fields (see [Field Styling](#field-styling))
+
+#### Field Styling
+
+Because the "protected" field are protected you can use only limited CSS properties and selectors:
+
+White listed CSS properties:
+
+- `color`
+- `font-size`
+- `text-align`
+- `letter-spacing`
+- `text-decoration`
+- `text-shadow`
+- `text-transform`
+
+White listed CSS rules:
+
+- `::placeholder`
+
+Allowed properties and selectors are organized into three groups within field creation configuration options.
+
+```
+var cardNumberFieldOptions = {
+	placeholder: 'Enter your Credit Card Number',
+
+	// ...
+	
+	styles: {
+	  base: {
+		'color': '#000000',
+		'::placeholder': {
+			color: '#F2F2F2'
+		}
+	  },
+	  invalid: {
+		'color': 'red'
+	  },
+	  valid: {
+		'color': 'green'
+	  }
+	}
+};
+```
+
+Each group represents the state of the protected field like a CSS class. And you can imagine it as following CSS code:
+
+```
+/* base styles would be applied as a default style */
+input.credit-card .base {
+	color: #000000;
+	font-size: 16px;
+	text-align: center;
+	letter-spacing: .25em;
+	text-decoration: underline;
+	text-shadow: 1px 1px 2px black, 0 0 1em red;
+	text-transform: uppercase;
+}
+
+input.credit-card ::placeholder {
+	color: gray;
+}
+
+/* .invalid styles would be applied on top of the .base when field validation fails */
+input.credit-card .base .invalid {
+	color: red;
+}
+
+/* .valid styles would be applied on top of the .base when the field became valid */
+input.credit-card .base .valid {
+	color: green;
+}
+```
+
+> **Note**
+>
+> This information is related only to "protected" fields, which were created with [Hosted Fields Integration manager](#hosted-fields-integration-type) via .create(...) and .mount(...) call.
+> 
+> In case you are going to use your own markup/widget/etc. for additional fields (First name, Last name, Email, Phone number, Social ID) then you are free to use any CSS code to style them.
+
 #### Hosted fields integration interaction
 
 Right after field creation you can use field instance to listen basic set of events to interact with code on your page.
