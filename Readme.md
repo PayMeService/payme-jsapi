@@ -350,7 +350,7 @@ Whitelisted CSS properties:
 - `text-shadow`
 - `text-transform`
 
-White listed CSS rules:
+Whitelisted CSS rules:
 
 - `::placeholder`
 
