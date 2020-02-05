@@ -315,7 +315,7 @@ cardNumber.mount('#card-number-container').then(function() {
 
 
 #### Field Creation Options
-`.create(field, options)` method accepts an optional second argument `options` which is helpful in case you want customize the field created with it.
+`.create(field, options)` method accepts an optional second argument `options` which is helpful in case you want to customize the field created with it.
 ```
 var cardNumberFieldOptions = {
     placeholder: 'Enter your Credit Card Number',
@@ -328,19 +328,19 @@ var cardNumberFieldOptions = {
 var cardNumber = fields.create('cardNumber', cardNumberFieldOptions);
 ```
 
-The properties available for customization:
+The available properties for customization:
 
 Property        | Description
 ----------------| -------------
 `placeholder`   | Placeholder text for empty field
-`messages`      | Validation messages object, can have properties `required` and `invalid` (see [Field Event Object](#field-event-object) and [Examples page](https://paymeservice.github.io/payme-jsapi/))
+`messages`      | Validation messages object, can have `required` and `invalid` properties (see [Field Event Object](#field-event-object) and [Examples page](https://paymeservice.github.io/payme-jsapi/))
 `styles`        | CSS properties for "protected" fields (see [Field Styling](#field-styling))
 
 #### Field Styling
 
-Because the "protected" field are protected you can use only limited CSS properties and selectors:
+Because the "protected" fields are protected, you can use only limited CSS properties and selectors:
 
-White listed CSS properties:
+Whitelisted CSS properties:
 
 - `color`
 - `font-size`
@@ -379,7 +379,7 @@ var cardNumberFieldOptions = {
 };
 ```
 
-Each group represents the state of the protected field like a CSS class. And you can imagine it as following CSS code:
+Each group represents the state of the protected field like a CSS class. For example:
 
 ```
 /* base styles would be applied as a default style */
@@ -412,7 +412,7 @@ input.credit-card .base .valid {
 >
 > This information is related only to "protected" fields, which were created with [Hosted Fields Integration manager](#hosted-fields-integration-type) via .create(...) and .mount(...) call.
 > 
-> In case you are going to use your own markup/widget/etc. for additional fields (First name, Last name, Email, Phone number, Social ID) then you are free to use any CSS code to style them.
+> In case you are going to use your own markup/widget/etc. for any additional fields (first name, last name, email, phone number, social ID) then you are free to use any CSS code to style them.
 
 #### Hosted fields integration interaction
 
