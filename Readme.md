@@ -356,7 +356,7 @@ Whitelisted CSS rules:
 
 Allowed properties and selectors are organized into three groups within field creation configuration options.
 
-```
+```javascript
 var cardNumberFieldOptions = {
 	placeholder: 'Enter your Credit Card Number',
 
@@ -381,7 +381,7 @@ var cardNumberFieldOptions = {
 
 Each group represents the state of the protected field like a CSS class. For example:
 
-```
+```css
 /* base styles would be applied as a default style */
 input.credit-card .base {
 	color: #000000;
@@ -420,7 +420,7 @@ Right after field creation you can use field instance to listen basic set of eve
 
 For example, let's listen `keyup` event on credit card field
 
-```
+```javascript
 
 PayMe.create(key, { testMode: true })
     .then(function (instance) {
@@ -466,7 +466,7 @@ Event type        | Fields       | Description
 
 Shape of `change`, `blur`, `focus`, `keyup`, `keydown`, `keypress`, `validity-changed` are the same among all the fields and can be either valid or not
 
-```
+```javascript
 // Valid field
 {
     type: "focus",       
@@ -476,7 +476,7 @@ Shape of `change`, `blur`, `focus`, `keyup`, `keydown`, `keypress`, `validity-ch
 }
 ```
 
-```
+```javascript
 // Invalid field
 {
     type: "focus",
@@ -490,7 +490,7 @@ Shape of `change`, `blur`, `focus`, `keyup`, `keydown`, `keypress`, `validity-ch
 
 Shape of `card-type-changed` is little bit different and it can be used for displaying credit card brand icon
 
-```
+```javascript
 // Valid field
 {
     type: "card-type-changed"
@@ -503,7 +503,7 @@ Shape of `card-type-changed` is little bit different and it can be used for disp
 }
 ```
 
-```
+```javascript
 // Invalid field
 {
     type: "card-type-changed"
@@ -537,7 +537,7 @@ Is a process of storing sensitive data in the protected vault and providing safe
 
 To kick off tokenization you must call `tokenize(...)` method on `Ingeration Manager` instance
 
-```
+```javascript
 
 PayMe.create(key, { testMode: true })
   .then(function (instance) {
@@ -598,7 +598,7 @@ to use any presenting, styling, formatting logic. To help you with validation we
 
 Particular validator can be obtained and used by this code
 
-```
+```javascript
 // ...
 
 var firstNameValidator = PayMe.validators[PayMe.fields.NAME_FIRST];
@@ -622,7 +622,7 @@ If validation result is success then `validation` would be `null` in the other c
 
 #### tokenizationResult structure (successful tokenization)
 
-```
+```javascript
 {
   // Safe Credit Card data
   card: {                                         
@@ -655,7 +655,7 @@ If validation result is success then `validation` would be `null` in the other c
 
 #### tokenizationError structure (tokenization failed)
 
-```
+```javascript
 {
   // Says that the form contains invalid values
   validationError: true
@@ -670,7 +670,7 @@ If validation result is success then `validation` would be `null` in the other c
 }
 ```
 also you can receive such shape **(may be changed in the future)**
-```
+```javascript
 {
 
   // This error means that tokenization has already
@@ -689,7 +689,7 @@ and you don't want bother your users requested filling their data again. You can
 object.
 
 For example if you already have *email* or *First + Last Name* and you want provide it directly, you can to it
-```
+```javascript
 
 PayMe.create(key, { testMode: true })
   .then(function (instance) {
@@ -764,7 +764,7 @@ PayMe.create(key, { testMode: true })
 You as an embedder may decide by yourself but main idea is **send tokenization data to backend and generate sale** using [Generate sale](https://www1.isracard-global.com/system/documentation#/reference/sales/generate-sale)
 
 Let's say you have such tokenization result and sent it to your backend
-```
+```javascript
 {
   card: {                                         
     cardMask: "411111******1111",
