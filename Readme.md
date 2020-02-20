@@ -39,7 +39,7 @@ The same UI/UX example like *Example 1* but shows how to tackle RTL languages
 
 ### Include Client API Library
 
-```
+```html
 <html lang="en">
     <head>
       ...
@@ -54,7 +54,7 @@ The same UI/UX example like *Example 1* but shows how to tackle RTL languages
 
 ### Put your payment form markup
 
-```
+```html
 <html lang="en">
     <head>
         <!-- Include Client API Library in your page -->
@@ -127,7 +127,7 @@ The same UI/UX example like *Example 1* but shows how to tackle RTL languages
 ```
 
 ### Initialization and interaction
-```
+```html
 <html lang="en">
     <head>
         <!-- Include Client API Library into your page -->
@@ -167,7 +167,7 @@ The same UI/UX example like *Example 1* but shows how to tackle RTL languages
 #### Let's break down code, presented above.
 
 First of all you must get and provide your Merchant API key from Settings page in the dashboard.
-```
+```javascript
 ...
 // This is the Merchant API key (Test API key in this case)
 var key = 'MPLXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX';
@@ -175,7 +175,7 @@ var key = 'MPLXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX';
 ```
 
 Second, you must obtain integration **instance** for the merchant
-```
+```javascript
 var key = 'MPLXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX';
 
 // There is optional configuration object with testMode: true
@@ -215,7 +215,7 @@ Next step - to initialize integration type and get corresponding manager
 This integration type allows you to use secure way to collect user's sensitive data for making payments.
 
 To obtain Hosted Fields manager you must call `hostedFields` method 
-```
+```javascript
 
 PayMe.create(key, { testMode: true })
     .then(function (instance) {
@@ -233,7 +233,7 @@ As soon as you have Hosted Fields Manager you are ready to create actual protect
 
 For example let's create 3 most important fields
 
-```
+```javascript
 
 PayMe.create(key, { testMode: true })
     .then(function (instance) {
@@ -255,7 +255,7 @@ PayMe.create(key, { testMode: true })
 > **Hint**
 >
 > We propose to create field names within `Payme.fields` object
-```
+```javascript
  // Instead of this
  var cardNumber = fields.create('cardNumber');
  // try to use this
@@ -263,7 +263,7 @@ PayMe.create(key, { testMode: true })
 ```
 
 Having created all of necessary fields, they must be mounted to the chosen page place. Fields will be shown on your page only after mounting
-```
+```javascript
 
 PayMe.create(key, { testMode: true })
     .then(function (instance) {
@@ -288,7 +288,7 @@ PayMe.create(key, { testMode: true })
 > **Hint**
 >
 > Field instance `mount` method accepts any valid query selector
-```
+```javascript
 // Select by id
 cardNumber.mount('#card-number-container');
 
@@ -302,7 +302,7 @@ cardNumber.mount('[data-role="credit-card-input"]');
 > **Hint**
 >
 > We can be notified on result by promise, because field mounting is an asynchronous process  
-```
+```javascript
 ...
 // Mount credit card inside container with id="card-number-container"
 cardNumber.mount('#card-number-container').then(function() {
@@ -316,7 +316,7 @@ cardNumber.mount('#card-number-container').then(function() {
 
 #### Field Creation Options
 `.create(field, options)` method accepts an optional second argument `options` which is helpful in case you want to customize the field created with it.
-```
+```javascript
 var cardNumberFieldOptions = {
     placeholder: 'Enter your Credit Card Number',
     messages: {
