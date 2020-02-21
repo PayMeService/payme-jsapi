@@ -554,6 +554,7 @@ PayMe.create(key, { testMode: true })
       payerEmail: 'foo-bar@domain.com',
       payerPhone: '1231231',
       payerSocialId: '12345',
+      payerZipCode: '123456',
 
       total: {
         label: 'Order #123123',
@@ -718,6 +719,7 @@ PayMe.create(key, { testMode: true })
       
       // payerPhone: '1231231',         // value isn't needed due created Phone number field
       // payerSocialId: '12345',        // value isn't needed due created Social Id field
+      // payerZipCode: '123456',        // value isn't needed due created Zip Code field
 
       total: {
         label: 'Order #123123',
