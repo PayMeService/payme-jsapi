@@ -4,7 +4,7 @@
 [Check examples page](https://paymeservice.github.io/payme-jsapi/)
 
 ### Basic
--   [jsFiddle](https://jsfiddle.net/IlyaYakushev/50t31vxw/)
+-   [jsFiddle](https://jsfiddle.net/IlyaYakushev/9senpv1x/)
 
 Basic example based on Bootstrap 3
 
