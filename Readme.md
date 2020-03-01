@@ -4,7 +4,7 @@
 [Check examples page](https://paymeservice.github.io/payme-jsapi/)
 
 ### Basic
--   [jsFiddle](https://jsfiddle.net/IlyaYakushev/50t31vxw/)
+-   [jsFiddle](https://jsfiddle.net/IlyaYakushev/9senpv1x/)
 
 Basic example based on Bootstrap 3
 
@@ -39,7 +39,7 @@ The same UI/UX example like *Example 1* but shows how to tackle RTL languages
 
 ### Include Client API Library
 
-```
+```html
 <html lang="en">
     <head>
       ...
@@ -54,7 +54,7 @@ The same UI/UX example like *Example 1* but shows how to tackle RTL languages
 
 ### Put your payment form markup
 
-```
+```html
 <html lang="en">
     <head>
         <!-- Include Client API Library in your page -->
@@ -127,7 +127,7 @@ The same UI/UX example like *Example 1* but shows how to tackle RTL languages
 ```
 
 ### Initialization and interaction
-```
+```html
 <html lang="en">
     <head>
         <!-- Include Client API Library into your page -->
@@ -167,7 +167,7 @@ The same UI/UX example like *Example 1* but shows how to tackle RTL languages
 #### Let's break down code, presented above.
 
 First of all you must get and provide your Merchant API key from Settings page in the dashboard.
-```
+```javascript
 ...
 // This is the Merchant API key (Test API key in this case)
 var key = 'MPLXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX';
@@ -175,7 +175,7 @@ var key = 'MPLXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX';
 ```
 
 Second, you must obtain integration **instance** for the merchant
-```
+```javascript
 var key = 'MPLXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX';
 
 // There is optional configuration object with testMode: true
@@ -215,7 +215,7 @@ Next step - to initialize integration type and get corresponding manager
 This integration type allows you to use secure way to collect user's sensitive data for making payments.
 
 To obtain Hosted Fields manager you must call `hostedFields` method 
-```
+```javascript
 
 PayMe.create(key, { testMode: true })
     .then(function (instance) {
@@ -233,7 +233,7 @@ As soon as you have Hosted Fields Manager you are ready to create actual protect
 
 For example let's create 3 most important fields
 
-```
+```javascript
 
 PayMe.create(key, { testMode: true })
     .then(function (instance) {
@@ -255,7 +255,7 @@ PayMe.create(key, { testMode: true })
 > **Hint**
 >
 > We propose to create field names within `Payme.fields` object
-```
+```javascript
  // Instead of this
  var cardNumber = fields.create('cardNumber');
  // try to use this
@@ -263,7 +263,7 @@ PayMe.create(key, { testMode: true })
 ```
 
 Having created all of necessary fields, they must be mounted to the chosen page place. Fields will be shown on your page only after mounting
-```
+```javascript
 
 PayMe.create(key, { testMode: true })
     .then(function (instance) {
@@ -288,7 +288,7 @@ PayMe.create(key, { testMode: true })
 > **Hint**
 >
 > Field instance `mount` method accepts any valid query selector
-```
+```javascript
 // Select by id
 cardNumber.mount('#card-number-container');
 
@@ -302,7 +302,7 @@ cardNumber.mount('[data-role="credit-card-input"]');
 > **Hint**
 >
 > We can be notified on result by promise, because field mounting is an asynchronous process  
-```
+```javascript
 ...
 // Mount credit card inside container with id="card-number-container"
 cardNumber.mount('#card-number-container').then(function() {
@@ -316,7 +316,7 @@ cardNumber.mount('#card-number-container').then(function() {
 
 #### Field Creation Options
 `.create(field, options)` method accepts an optional second argument `options` which is helpful in case you want to customize the field created with it.
-```
+```javascript
 var cardNumberFieldOptions = {
     placeholder: 'Enter your Credit Card Number',
     messages: {
@@ -356,7 +356,7 @@ Whitelisted CSS rules:
 
 Allowed properties and selectors are organized into three groups within field creation configuration options.
 
-```
+```javascript
 var cardNumberFieldOptions = {
 	placeholder: 'Enter your Credit Card Number',
 
@@ -381,7 +381,7 @@ var cardNumberFieldOptions = {
 
 Each group represents the state of the protected field like a CSS class. For example:
 
-```
+```css
 /* base styles would be applied as a default style */
 input.credit-card .base {
 	color: #000000;
@@ -420,7 +420,7 @@ Right after field creation you can use field instance to listen basic set of eve
 
 For example, let's listen `keyup` event on credit card field
 
-```
+```javascript
 
 PayMe.create(key, { testMode: true })
     .then(function (instance) {
@@ -466,7 +466,7 @@ Event type        | Fields       | Description
 
 Shape of `change`, `blur`, `focus`, `keyup`, `keydown`, `keypress`, `validity-changed` are the same among all the fields and can be either valid or not
 
-```
+```javascript
 // Valid field
 {
     type: "focus",       
@@ -476,7 +476,7 @@ Shape of `change`, `blur`, `focus`, `keyup`, `keydown`, `keypress`, `validity-ch
 }
 ```
 
-```
+```javascript
 // Invalid field
 {
     type: "focus",
@@ -490,7 +490,7 @@ Shape of `change`, `blur`, `focus`, `keyup`, `keydown`, `keypress`, `validity-ch
 
 Shape of `card-type-changed` is little bit different and it can be used for displaying credit card brand icon
 
-```
+```javascript
 // Valid field
 {
     type: "card-type-changed"
@@ -503,7 +503,7 @@ Shape of `card-type-changed` is little bit different and it can be used for disp
 }
 ```
 
-```
+```javascript
 // Invalid field
 {
     type: "card-type-changed"
@@ -537,7 +537,7 @@ Is a process of storing sensitive data in the protected vault and providing safe
 
 To kick off tokenization you must call `tokenize(...)` method on `Ingeration Manager` instance
 
-```
+```javascript
 
 PayMe.create(key, { testMode: true })
   .then(function (instance) {
@@ -554,6 +554,7 @@ PayMe.create(key, { testMode: true })
       payerEmail: 'foo-bar@domain.com',
       payerPhone: '1231231',
       payerSocialId: '12345',
+      payerZipCode: '123456',
 
       total: {
         label: 'Order #123123',
@@ -598,7 +599,7 @@ to use any presenting, styling, formatting logic. To help you with validation we
 
 Particular validator can be obtained and used by this code
 
-```
+```javascript
 // ...
 
 var firstNameValidator = PayMe.validators[PayMe.fields.NAME_FIRST];
@@ -622,7 +623,7 @@ If validation result is success then `validation` would be `null` in the other c
 
 #### tokenizationResult structure (successful tokenization)
 
-```
+```javascript
 {
   // Safe Credit Card data
   card: {                                         
@@ -655,7 +656,7 @@ If validation result is success then `validation` would be `null` in the other c
 
 #### tokenizationError structure (tokenization failed)
 
-```
+```javascript
 {
   // Says that the form contains invalid values
   validationError: true
@@ -670,7 +671,7 @@ If validation result is success then `validation` would be `null` in the other c
 }
 ```
 also you can receive such shape **(may be changed in the future)**
-```
+```javascript
 {
 
   // This error means that tokenization has already
@@ -689,7 +690,7 @@ and you don't want bother your users requested filling their data again. You can
 object.
 
 For example if you already have *email* or *First + Last Name* and you want provide it directly, you can to it
-```
+```javascript
 
 PayMe.create(key, { testMode: true })
   .then(function (instance) {
@@ -718,6 +719,7 @@ PayMe.create(key, { testMode: true })
       
       // payerPhone: '1231231',         // value isn't needed due created Phone number field
       // payerSocialId: '12345',        // value isn't needed due created Social Id field
+      // payerZipCode: '123456',        // value isn't needed due created Zip Code field
 
       total: {
         label: 'Order #123123',
@@ -764,7 +766,7 @@ PayMe.create(key, { testMode: true })
 You as an embedder may decide by yourself but main idea is **send tokenization data to backend and generate sale** using [Generate sale](https://www1.isracard-global.com/system/documentation#/reference/sales/generate-sale)
 
 Let's say you have such tokenization result and sent it to your backend
-```
+```javascript
 {
   card: {                                         
     cardMask: "411111******1111",
