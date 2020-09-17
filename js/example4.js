@@ -1,7 +1,7 @@
 /**
  * Created by thoryachev on 22.11.2018.
  */
-(function(document, mpl) {
+(function(document, apiKey) {
 
   // Cache DOM Nodes ---------------------------------------------------------------------------------------------------
 
@@ -191,7 +191,7 @@
     submitButton.disabled = openModalButton.disabled = true;
 
     // Getting hosted fields integration manager
-    PayMe.create(mpl, { testMode: true, }).then((instance) => {
+    PayMe.create(apiKey, { testMode: true, }).then((instance) => {
 
       const fields = instance.hostedFields();
 
@@ -347,4 +347,4 @@
 
   init();
 
-})(document, 'MPL15282-97137EVV-KOAOAOIT-VWCZPB8V');
+})(document, 'ac76cbc1-9a83-47a4-82bd-1c82c4979fdd');
