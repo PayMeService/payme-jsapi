@@ -4,7 +4,7 @@
 [Check examples page](https://paymeservice.github.io/payme-jsapi/)
 
 ### Basic
--   [jsFiddle](https://jsfiddle.net/IlyaYakushev/9senpv1x/)
+-   [jsFiddle](https://jsfiddle.net/IlyaYakushev/td6csmLx/)
 
 Basic example based on Bootstrap 3
 
@@ -139,9 +139,9 @@ The same UI/UX example like *Example 1* but shows how to tackle RTL languages
         <!-- PAYMENT FORM ENDS HERE -->
         <script>
             
-            var key = 'MPLXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX'; // Merchant API key from Settings page in the dashboard
+            var apiKey = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'; // Merchant API key from Settings page in the dashboard
             
-            PayMe.create(key, { testMode: true }).then(function (instance) {
+            PayMe.create(apiKey, { testMode: true }).then(function (instance) {
            
               var fields = instance.hostedFields();
               
@@ -170,17 +170,17 @@ First of all you must get and provide your Merchant API key from Settings page i
 ```javascript
 ...
 // This is the Merchant API key (Test API key in this case)
-var key = 'MPLXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX';
+var apiKey = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
 ...
 ```
 
 Second, you must obtain integration **instance** for the merchant
 ```javascript
-var key = 'MPLXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX';
+var apiKey = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
 
 // There is optional configuration object with testMode: true
 // because we are using the API key from the test server
-PayMe.create(key, { testMode: true })
+PayMe.create(apiKey, { testMode: true })
     .then(function (instance) {
     
       // Here we can work with successfully initialized
