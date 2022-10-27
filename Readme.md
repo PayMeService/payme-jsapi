@@ -763,7 +763,7 @@ PayMe.create(key, { testMode: true })
 
 ## What should be done with tokenized data?
 
-You as an embedder may decide by yourself but main idea is **send tokenization data to backend and generate sale** using [Generate sale](https://www1.isracard-global.com/system/documentation#/reference/sales/generate-sale)
+You as an embedder may decide by yourself but main idea is **send tokenization data to backend and generate sale** using [Generate sale](https://docs.payme.io/docs/payments/d7da26bb42da8-generate-sale)
 
 Let's say you have such tokenization result and sent it to your backend
 ```javascript
@@ -802,7 +802,7 @@ On the backend side you can build sale payload
 `currency`                                 | tokenizationData.total.amount.currency
 `buyer_key`                                | tokenizationData.token
 
-and send it to the `https://****.paymeservice.com/api/generate-sale`
+and send it to the `https://****.payme.io/api/generate-sale`
 
 # Security notes:
 
