@@ -4,7 +4,7 @@
 [Check examples page](https://paymeservice.github.io/payme-jsapi/)
 
 ### Basic
--   [jsFiddle](https://jsfiddle.net/IlyaYakushev/td6csmLx/)
+-   [jsFiddle](https://jsfiddle.net/0tmq6c2h/)
 
 Basic example based on Bootstrap 3
 
@@ -45,7 +45,7 @@ The same UI/UX example like *Example 1* but shows how to tackle RTL languages
       ...
     
       <!-- Include Client API Library in your page -->
-      <script src="https://cdn.paymeservice.com/hf/v1/hostedfields.js"></script>
+      <script src="https://cdn.payme.io/hf/v1/hostedfields.js"></script>
       ...
     </head>
     <body>...</body>
